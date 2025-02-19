@@ -322,7 +322,7 @@ class AdminController extends Controller
     public function product_update(Request $request){
         $request -> validate([
             'name' => 'required',
-            'slug' => 'required|unique:products,slug'.$request->id,
+            'slug' => 'required|unique:products,slug,'.$request->id,
             'short_description' => 'required',
             'description' => 'required',
             'regular_price'=> 'required',
@@ -331,7 +331,7 @@ class AdminController extends Controller
             'stock_status'=>'required',
             'featured'=>'required',
             'quantity'=>'required',
-            'image'=>'required|mimes:png, jpg,jpeg|max:2048',
+            'image'=>'mimes:png, jpg,jpeg|max:2048',
             'category_id'=>'required',
             'brand_id'=>'required'
         ]);
@@ -355,6 +355,13 @@ class AdminController extends Controller
         $current_timestamp = Carbon::now()->timestamp;
 
         if($request->hasFile('image')){
+            //prvo obrise staru sliku i njenu slicicu pa onda doda novu
+            if(File::exists(public_path('uploads/products').'/'.$product->image)){
+                File::delete(public_path('uploads/products').'/'.$product->image);
+            }
+            if(File::exists(public_path('uploads/products/thumbnails').'/'.$product->image)){
+                File::delete(public_path('uploads/products/thumbnails').'/'.$product->image);
+            }
             $image = $request->file('image');
             $imageName = $current_timestamp.'.'.$image->extension();
             $this -> generateProductThumbnail($image, $imageName);
@@ -365,6 +372,14 @@ class AdminController extends Controller
         $galleryImages = "";
         $counter = 1;
         if($request->hasFile('images')){
+            foreach(explode(',' , $product->images) as $oFile) {
+                if (File::exists(public_path('uploads/products') . '/' . $oFile)) {
+                    File::delete(public_path('uploads/products') . '/' . $oFile);
+                }
+                if (File::exists(public_path('uploads/products/thumbnails') . '/' . $oFile)) {
+                    File::delete(public_path('uploads/products/thumbnails') . '/' . $oFile);
+                }
+            }
             $allowedFileExtensions = ['jpg', 'png', 'jpeg'];
             $files = $request->file('images');
             foreach ($files as $file){
@@ -378,11 +393,33 @@ class AdminController extends Controller
                 }
             }
             $galleryImages = implode(',',$galleryArray);
-            //implode funkcija konvertuje array u string razdvojen zarezima
+            $product ->images = $galleryImages;
         }
-        $product ->images = $galleryImages;
+
 
         $product->save();
-        return redirect()->route('admin.products')->with('status', '')
+        return redirect()->route('admin.products')->with('status', 'Podaci o artiklu su uspješno izmjenjeni.');
+    }
+
+    public function product_delete($id){
+        $product = Product::find($id);
+        //pobrisemo prvo slike
+        if (File::exists(public_path('uploads/products') . '/' . $product->image)) {
+            File::delete(public_path('uploads/products') . '/' . $product->image);
+        }
+        if (File::exists(public_path('uploads/products/thumbnails') . '/' . $product->image)) {
+            File::delete(public_path('uploads/products/thumbnails') . '/' . $product->image);
+        }
+        foreach(explode(',' , $product->images) as $oFile) {
+            if (File::exists(public_path('uploads/products') . '/' . $oFile)) {
+                File::delete(public_path('uploads/products') . '/' . $oFile);
+            }
+            if (File::exists(public_path('uploads/products/thumbnails') . '/' . $oFile)) {
+                File::delete(public_path('uploads/products/thumbnails') . '/' . $oFile);
+            }
+        }
+
+        $product->delete();
+        return redirect()->route('admin.products')->with('status', 'Artikal je uspjesno izbrisan.');
     }
 }
