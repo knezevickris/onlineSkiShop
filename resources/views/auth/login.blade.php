@@ -18,20 +18,17 @@
                             <div class="form-floating mb-3">
                                 <input class="form-control form-control_gray @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required="" autocomplete="email"
                                        autofocus="" placeholder="Email adresa">
-                                <label for="email">Email adresa *</label>
+                               <!-- <label for="email">Email adresa *</label> -->
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-
-                            <div class="pb-3"></div>
-
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-3" >
                                 <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required=""
                                        autocomplete="current-password" placeholder="Lozinka">
-                                <label for="customerPasswodInput">Lozinka *</label>
+                               <!-- <label for="customerPasswodInput"">Lozinka *</label> -->
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

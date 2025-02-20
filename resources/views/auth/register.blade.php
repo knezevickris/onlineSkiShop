@@ -18,7 +18,7 @@
                             <div class="form-floating mb-3">
                                 <input class="form-control form-control_gray @error('name') is-invalid @enderror" name="name" value="{{old('name')}}" required="" autocomplete="name"
                                        autofocus="">
-                                <label for="name">Ime</label>
+                                <label for="name">Ime *</label>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
