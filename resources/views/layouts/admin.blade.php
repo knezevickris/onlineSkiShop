@@ -195,7 +195,7 @@
 
                             <form class="form-search flex-grow">
                                 <fieldset class="name">
-                                    <input type="text" placeholder="Search here..." class="show-search" name="name"
+                                    <input type="text" placeholder="Pretraži..." class="show-search" name="name"
                                            tabindex="2" value="" aria-required="true" required="">
                                 </fieldset>
                                 <div class="button-submit">
