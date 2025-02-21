@@ -61,20 +61,32 @@
                             <td>
                                 <div class="qty-control position-relative">
                                     <input type="number" name="quantity" value="{{$item->qty}}" min="1" class="qty-control__number text-center">
-                                    <div class="qty-control__reduce">-</div>
-                                    <div class="qty-control__increase">+</div>
+                                    <form method="POST" action="{{route('cart.qty.decrease', ['rowId'=>$item->rowId])}}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="qty-control__reduce">-</div>
+                                    </form>
+                                    <form method="POST" action="{{route('cart.qty.increase', ['rowId'=>$item->rowId])}}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="qty-control__increase">+</div>
+                                    </form>
                                 </div>
                             </td>
                             <td>
                                 <span class="shopping-cart__subtotal">{{$item->subtotal}} KM</span>
                             </td>
                             <td>
-                                <a href="#" class="remove-cart">
+                                <form method="post" action="{{route('cart.item.remove', ['rowId'=>$item->rowId])}}">
+                                    @csrf
+                                    @method("DELETE")
+                                <a href="javascript:void(0)" class="remove-cart">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
                                         <path d="M0.885506 0.0889838L9.74057 8.94404L8.85506 9.82955L0 0.97449L0.885506 0.0889838Z" />
                                     </svg>
                                 </a>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -83,10 +95,13 @@
                     <div class="cart-table-footer">
                         <form action="#" class="position-relative bg-body">
                             <input class="form-control" type="text" name="coupon_code" placeholder="kod za popust">
-                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit"
-                                   value="Iskoristi kupon">
+                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Iskoristi kupon">
                         </form>
-                        <button class="btn btn-light">Ažuriraj korpu</button>
+                        <form action="{{route('cart.empty')}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-light">Isprazni korpu</button>
+                        </form>
                     </div>
                 </div>
                 <div class="shopping-cart__totals-wrapper">
@@ -132,6 +147,22 @@
             </div>
         </section>
     </main>
-
-
 @endsection
+
+@push('scripts')
+    <script>
+        $(function(){
+            $(".qty-control__increase").on("click", function (){
+                $(this).closest('form').submit();
+            });
+
+            $(".qty-control__reduce").on("click", function (){
+                $(this).closest('form').submit();
+            });
+
+            $(".remove-cart").on("click", function (){
+                $(this).closest('form').submit();
+            });
+        })
+    </script>
+@endpush
