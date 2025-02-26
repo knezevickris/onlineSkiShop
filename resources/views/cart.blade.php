@@ -1,5 +1,14 @@
 @extends('layouts.app')
 @section('content')
+    <style>
+        .text-success{
+            color: #278c04 !important;
+        }
+        .text-danger{
+            color: #d61808 !important;
+        }
+    </style>
+
     <main class="pt-90">
         <div class="mb-4 pb-4"></div>
         <section class="shop-checkout container">
@@ -93,41 +102,91 @@
                         </tbody>
                     </table>
                     <div class="cart-table-footer">
-                        <form action="#" class="position-relative bg-body">
-                            <input class="form-control" type="text" name="coupon_code" placeholder="kod za popust">
-                            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Iskoristi kupon">
-                        </form>
+                        @if(!Session::has('coupon'))
+                            <form action="{{route('cart.coupon.apply')}}" method="post" class="position-relative bg-body">
+                                @csrf
+                                <input class="form-control" value="" type="text" name="coupon_code" placeholder="kod za popust">
+                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Iskoristi kupon">
+                            </form>
+                        @else
+                            <form action="{{route('cart.coupon.remove')}}" method="post" class="position-relative bg-body">
+                                @csrf
+                                @method('DELETE')
+                                <input class="form-control" value="@if(Session::has('coupon')) {{Session::get('coupon')['code']}} prihvacen! @endif" type="text" name="coupon_code" placeholder="kod za popust">
+                                <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Ukloni kupon">
+                            </form>
+                        @endif
                         <form action="{{route('cart.empty')}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-light">Isprazni korpu</button>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-light">Isprazni korpu</button>
                         </form>
+                    </div>
+                    <div>
+                        @if(Session::has('success'))
+                            <p class="text-success"></p>
+                            {{Session::get('success')}}
+                        @elseif(Session::has('error'))
+                            <p class="text-danger"></p>
+                            {{Session::get('error')}}
+                        @endif
                     </div>
                 </div>
                 <div class="shopping-cart__totals-wrapper">
                     <div class="sticky-content">
                         <div class="shopping-cart__totals">
                             <h3>Račun</h3>
-                            <table class="cart-totals">
-                                <tbody>
-                                <tr>
-                                    <th>Cijena</th>
-                                    <td>{{Cart::instance('cart')->subtotal()}} KM</td>
-                                </tr>
-                                <tr>
-                                    <th>Dostava</th>
-                                    <td>0.00 KM</td>
-                                </tr>
-                                <tr>
-                                    <th>PDV</th>
-                                    <td>{{Cart::instance('cart')->tax()}} KM</td>
-                                </tr>
-                                <tr>
-                                    <th>Ukupno</th>
-                                    <td>{{Cart::instance('cart')->total()}} KM</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            @if(Session::has('discounts'))
+                                <table class="cart-totals">
+                                    <tbody>
+                                    <tr>
+                                        <th>Cijena</th>
+                                        <td>{{Cart::instance('cart')->subtotal()}} KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Popust {{Session::get('coupon')['code']}}</th>
+                                        <td>{{Session::get('discounts')['discount']}} KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cijena nakon popusta</th>
+                                        <td>{{Session::get('discounts')['subtotal']}} KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dostava</th>
+                                        <td>0.00 KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>PDV</th>
+                                        <td>{{Session::get('discounts')['tax']}} KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ukupno</th>
+                                        <td>{{Session::get('discounts')['total']}} KM</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            @else
+                                <table class="cart-totals">
+                                    <tbody>
+                                    <tr>
+                                        <th>Cijena</th>
+                                        <td>{{Cart::instance('cart')->subtotal()}} KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dostava</th>
+                                        <td>0.00 KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>PDV</th>
+                                        <td>{{Cart::instance('cart')->tax()}} KM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ukupno</th>
+                                        <td>{{Cart::instance('cart')->total()}} KM</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            @endif
                         </div>
                         <div class="mobile_fixed-btn_wrapper">
                             <div class="button-wrapper container">
@@ -163,6 +222,6 @@
             $(".remove-cart").on("click", function (){
                 $(this).closest('form').submit();
             });
-        })
+        });
     </script>
 @endpush

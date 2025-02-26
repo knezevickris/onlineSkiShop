@@ -45,7 +45,7 @@
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>Redni br.</th>
+{{--                                        <th>Redni br.</th>--}}
                                         <th>Naziv</th>
                                         <th>Slug</th>
                                         <th>Proizvodi</th>
@@ -55,7 +55,7 @@
                                     <tbody>
                                     @foreach( $categories as $category )
                                         <tr>
-                                            <td>{{$category -> id}}</td>
+{{--                                            <td>{{$category -> id}}</td>--}}
                                             <td class="pname">
                                                 <div class="image">
                                                     <img src="{{asset('uploads/categories')}}/{{$category->image}}" alt="{{$category->name}}" class="image">

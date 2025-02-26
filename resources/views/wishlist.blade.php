@@ -23,8 +23,10 @@
                             @foreach($items as $item)
                                 <tr>
                                     <td>
+                                        <div class="shopping-cart__product-item">
+                                            <img loading="lazy" src="{{asset('uploads/products/thumbnails')}}/{{$item->image}}" width="120" height="120" alt="" />
+                                        </div>
                                     </td>
-
                                     <td>
                                         <div class="shopping-cart__product-item__detail">
                                             <h4>{{$item -> name}}</h4>
