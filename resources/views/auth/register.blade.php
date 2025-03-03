@@ -12,10 +12,10 @@
             </ul>
             <div class="tab-content pt-2" id="login_register_tab_content">
                 <div class="tab-pane fade show active" id="tab-item-register" role="tabpanel" aria-labelledby="register-tab">
-                    <div class="register-form">
-                        <form method="POST" action="{{route('register')}}" name="register-form" class="needs-validation" novalidate="">
+                    <div class="register-form" >
+                        <form  method="POST" action="{{route('register')}}" name="register-form" class="needs-validation" novalidate="">
                             @csrf
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-3" >
                                 <input class="form-control form-control_gray @error('name') is-invalid @enderror" name="name" value="{{old('name')}}" required="" autocomplete="name"
                                        autofocus="">
                                 <label for="name">Ime *</label>

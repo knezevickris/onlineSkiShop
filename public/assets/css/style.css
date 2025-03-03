@@ -9494,7 +9494,7 @@ img {
   .form-control:focus {
     color: #222222;
     background-color: #fff;
-    border-color: #222222;
+    /*border-color: #222222;*/
     outline: 0;
     box-shadow: none; }
   .form-control::-webkit-date-and-time-value {
@@ -9512,7 +9512,7 @@ img {
     color: #222222;
     background-color: #e9ecef;
     pointer-events: none;
-    border-color: inherit;
+    /*border-color: inherit;*/
     border-style: solid;
     border-width: 0;
     border-inline-end-width: 0.125rem;

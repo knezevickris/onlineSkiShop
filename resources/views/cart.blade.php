@@ -18,18 +18,21 @@
                     <span class="checkout-steps__item-number">01</span>
                     <span class="checkout-steps__item-title">
             <span>Korpa</span>
+                        <em>Provjerite listu svojih artikala</em>
           </span>
                 </a>
                 <a href="javascript:void(0)" class="checkout-steps__item">
                     <span class="checkout-steps__item-number">02</span>
                     <span class="checkout-steps__item-title">
             <span>Dostava i plaćanje</span>
+                        <em>Upravljajte detaljima isporuke</em>
           </span>
                 </a>
                 <a href="javascript:void(0)" class="checkout-steps__item">
                     <span class="checkout-steps__item-number">03</span>
                     <span class="checkout-steps__item-title">
             <span>Pregled i slanje narudžbe</span>
+                         <em>Pregledajte narudžbu i račun</em>
           </span>
                 </a>
             </div>
@@ -112,7 +115,7 @@
                             <form action="{{route('cart.coupon.remove')}}" method="post" class="position-relative bg-body">
                                 @csrf
                                 @method('DELETE')
-                                <input class="form-control" value="@if(Session::has('coupon')) {{Session::get('coupon')['code']}} prihvacen! @endif" type="text" name="coupon_code" placeholder="kod za popust">
+                                <input class="form-control"  type="text"  value="@if(Session::has('coupon')) {{Session::get('coupon')['code']}} prihvacen! @endif" name="coupon_code" placeholder="kod za popust">
                                 <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="Ukloni kupon">
                             </form>
                         @endif
@@ -144,7 +147,8 @@
                                         <td>{{Cart::instance('cart')->subtotal()}} KM</td>
                                     </tr>
                                     <tr>
-                                        <th>Popust {{Session::get('coupon')['code']}}</th>
+{{--                                        <th>Popust {{Session::get('coupon')['code']}}</th>--}}
+                                        <th>Popust {{ optional(Session::get('coupon'))['code'] ?? '' }}</th>
                                         <td>{{Session::get('discounts')['discount']}} KM</td>
                                     </tr>
                                     <tr>
@@ -190,7 +194,7 @@
                         </div>
                         <div class="mobile_fixed-btn_wrapper">
                             <div class="button-wrapper container">
-                                <a href="checkout.html" class="btn btn-primary btn-checkout">Sljedeći korak</a>
+                                <a href="{{route('cart.checkout')}}" class="btn btn-primary btn-checkout">Sljedeći korak</a>
                             </div>
                         </div>
                     </div>

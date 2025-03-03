@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                             <div class="form-floating mb-3" >
-                                <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required=""
+                                <input id="password" style="letter-spacing: 0; font-family: inherit" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror " name="password" required=""
                                        autocomplete="current-password" placeholder="Lozinka">
                                <!-- <label for="customerPasswodInput"">Lozinka *</label> -->
                                 @error('password')
