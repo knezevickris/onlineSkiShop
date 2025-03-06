@@ -134,6 +134,8 @@ class CartController extends Controller
 //                'customer_note' => 'sometimes|string'
 //          ]);
 
+
+
             $address = new Address();
             $address->name = $request->name;
             $address->address = $request->address;
@@ -194,8 +196,10 @@ class CartController extends Controller
             $transaction->user_id = $userId;
             $transaction->mode = $request->mode;
             $transaction->status = "pending";
+            $transaction->save();
         }
         else;
+
 
         Cart::instance('cart')->destroy();
         Session::forget('checkout');

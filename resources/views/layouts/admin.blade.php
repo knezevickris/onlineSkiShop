@@ -128,7 +128,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu-item">
-                                        <a href="orders.html" class="">
+                                        <a href="{{route('admin.orders')}}" class="">
                                             <div class="text">Sve porudžbine</div>
                                         </a>
                                     </li>

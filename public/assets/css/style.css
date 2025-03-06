@@ -8538,8 +8538,8 @@ img {
   .table > :not(caption) > tr > th {
     padding: 1.625rem 1.5rem 1.25rem;
     background-color: #222222;
-    color: #ffffff;
-    font-size: 1rem;
+    color: #222222;
+      font-size: 1rem;
     font-weight: 500; }
   .table > tbody {
     vertical-align: inherit; }
