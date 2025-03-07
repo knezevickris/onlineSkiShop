@@ -37,7 +37,7 @@
                     @endif
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th>Redni br.</th>
+                            <th>Id narudžbe</th>
                             <td>{{$order->id}}</td>
                             <th>Broj telefona</th>
                             <td>{{$order->phone}}</td>
@@ -48,7 +48,16 @@
                             <th>Datum kreiranja</th>
                             <td>{{$order->created_at}}</td>
                             <th>Datum isporuke</th>
-                            <td>{{$order->delivered_at}}</td>
+{{--                            <td>{{$order->delivered_at}}</td>--}}
+                            <td>
+                                @if(empty($order->delivered_date) && $order->status=='canceled')
+                                    <span class="text-dark-red">Isporuka otkazana.</span>
+                                @elseif(empty($order->delivered_date))
+                                    <span class="text-dark-green">Isporuka u toku.</span>
+                                @else
+                                    {{$order->delivered_date}}
+                                @endif
+                            </td>
                             <th>Napomena</th>
                             <td>{{empty($order->customer_note) ? 'Nema dodatne napomene' : $order->customer_note}}</td>
                         </tr>

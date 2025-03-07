@@ -170,7 +170,7 @@
                         <div id="accordion-filter-price" class="accordion-collapse collapse show border-0"
                              aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
                             <input class="price-range-slider" type="text" name="price_range" value="" data-slider-min="1"
-                                   data-slider-max="9999" data-slider-step="100" data-slider-value="[{{$minPrice}}, {{$maxPrice}}]" data-currency="BAM" />
+                                   data-slider-max="9999" data-slider-step="200" data-slider-value="[{{$minPrice}}, {{$maxPrice}}]" data-currency="BAM" />
                             <div class="price-range__info d-flex align-items-center mt-2">
                                 <div class="me-auto">
                                     <span class="text-secondary">Najniža: </span>

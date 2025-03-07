@@ -42,17 +42,17 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Redni br.</th>
-                            <th>Naziv</th>
-                            <th>Cijena</th>
-                            <th>Prodajna cijena</th>
-                            <th>Bar-kod</th>
-                            <th>Kategorija</th>
-                            <th>Brend</th>
-                            <th>Istaknuto</th>
-                            <th>Dostupno</th>
-                            <th>Količina</th>
-                            <th>Akcije</th>
+                            <th class="text-center">Id artikla</th>
+                            <th class="text-center">Naziv</th>
+                            <th class="text-center">Cijena</th>
+                            <th class="text-center">Prodajna cijena</th>
+                            <th class="text-center">Bar-kod</th>
+                            <th class="text-center">Kategorija</th>
+                            <th class="text-center">Brend</th>
+                            <th class="text-center">Istaknuto</th>
+                            <th class="text-center">Dostupno</th>
+                            <th class="text-center">Količina</th>
+                            <th class="text-center">Akcije</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -68,14 +68,14 @@
                                     <div class="text-tiny mt-3">{{$product->slug}}</div>
                                 </div>
                             </td>
-                            <td>{{$product->regular_price}} KM</td>
-                            <td>{{$product->sale_price}} KM</td>
-                            <td>{{$product->SKU}}</td>
-                            <td>{{$product->category->name}}</td>
-                            <td>{{$product->brand->name}}</td>
-                            <td>{{$product->featured == 0? 'No':'Yes'}}</td>
-                            <td>{{$product->stock_status}}</td>
-                            <td>{{$product->quantity}}</td>
+                            <td class="text-left">{{$product->regular_price}} KM</td>
+                            <td class="text-center">{{$product->sale_price}} KM</td>
+                            <td class="text-center">{{$product->SKU}}</td>
+                            <td class="text-center">{{$product->category->name}}</td>
+                            <td class="text-center">{{$product->brand->name}}</td>
+                            <td class="text-center">{{$product->featured == 0? 'No':'Yes'}}</td>
+                            <td class="text-center">{{$product->stock_status}}</td>
+                            <td class="text-center">{{$product->quantity}}</td>
                             <td>
                                 <div class="list-icon-function">
                                     <a href="{{route('shop.product.details', ['product_slug'=>$product->slug])}}" target="_blank">

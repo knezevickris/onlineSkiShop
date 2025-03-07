@@ -118,9 +118,12 @@
                             </div>
                         </div>
                         <div class="table-responsive">
+                            @if(Session::has('status'))
+                                <p class="alert alert-success">{{Session::get('status')}}</p>
+                            @endif
                             <table class="table table-bordered table-striped table-transaction">
                                 <tr>
-                                    <th>Redni br.</th>
+                                    <th>Id narudžbe</th>
                                     <td>{{$order->id}}</td>
                                     <th>Broj telefona</th>
                                     <td>{{$order->phone}}</td>
@@ -131,7 +134,15 @@
                                     <th>Datum kreiranja</th>
                                     <td>{{$order->created_at}}</td>
                                     <th>Datum isporuke</th>
-                                    <td>{{$order->delivered_at}}</td>
+                                    <td>
+                                        @if(empty($order->delivered_date) && $order->status=='canceled')
+                                            <span class="text-dark-red">Isporuka otkazana.</span>
+                                        @elseif(empty($order->delivered_date))
+                                            <span class="text-dark-green">Isporuka u toku.</span>
+                                        @else
+                                            {{$order->delivered_date}}
+                                        @endif
+                                    </td>
                                     <th>Napomena</th>
                                     <td>{{empty($order->customer_note)? 'Nema dodatne napomene.' : $order->customer_note}}</td>
                                 </tr>
@@ -260,8 +271,41 @@
                             </tbody>
                         </table>
                     </div>
+
+                    @if($order->status == 'ordered')
+                        <div class="wg-box mt-5 text-right">
+                            <form action="{{route('user.order.cancel')}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="order_id" value="{{$order->id}}">
+                                <button type="button" class="btn btn-danger cancel-order">Otkaži narudžbu</button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         </section>
     </main>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function(){
+            $('.cancel-order').on('click', function(e){
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title: "Potvrda",
+                    text: "Da li ste sigurni da želite otkazati izabranu narudžbu?",
+                    type: "warning",
+                    buttons:["Ne", "Da"],
+                    confirmButtonColor: '#dc3545'
+                }).then(function(result){
+                    if(result)
+                        form.submit();
+                });
+            });
+        });
+    </script>
+@endpush
+

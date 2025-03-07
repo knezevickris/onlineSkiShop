@@ -31,6 +31,13 @@
             background-color: #f5d700 !important;
             color: #000;
         }
+        .text-dark-red {
+            color: #b30000;
+        }
+
+        .text-dark-green {
+            color: #006400;
+        }
     </style>
     <main class="pt-90" style="padding-top: 0px;">
         <div class="mb-4 pb-4"></div>
@@ -46,7 +53,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="width: 80px">Redni br.</th>
+                                    <th class="text-center">Id narudžbe</th>
                                     <th class="text-center">Ime i prezime</th>
                                     <th class="text-center">Broj telefona</th>
                                     <th class="text-center">Subtotal</th>
@@ -68,10 +75,26 @@
                                         <td class="text-center">{{$order->subtotal}} KM</td>
                                         <td class="text-center">{{$order->tax}} KM</td>
                                         <td class="text-center">{{$order->total}} KM</td>
-                                        <td class="text-center">{{$order->status}}</td>
+                                        <td class="text-center">
+                                            @if($order->status == 'delivered')
+                                                <span class="badge bg-success">Isporučena</span>
+                                            @elseif($order->status == 'canceled')
+                                                <span class="badge bg-danger">Otkazana</span>
+                                            @else
+                                                <span class="badge bg-warning">Kreirana</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">{{$order->created_at}}</td>
                                         <td class="text-center">{{$order->orderItems->count()}}</td>
-                                        <td class="text-center">{{$order->delivered_date}}</td>
+                                        <td class="text-center">
+                                            @if(empty($order->delivered_date) && $order->status=='canceled')
+                                                <span class="text-dark-red">Isporuka otkazana.</span>
+                                            @elseif(empty($order->delivered_date))
+                                                <span class="text-dark-green">Isporuka u toku.</span>
+                                            @else
+                                                {{$order->delivered_date}}
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <a href="{{route('user.order.details', ['order_id'=>$order->id])}}">
                                                 <div class="list-icon-function view-icon">

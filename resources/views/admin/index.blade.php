@@ -14,7 +14,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Ukupno porudžbi</div>
+                                        <div class="body-text mb-2">Ukupno narudžbi</div>
                                         <h4>3</h4>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Porudžbine na čekanju</div>
+                                        <div class="body-text mb-2">Narudžbe na čekanju</div>
                                         <h4>3</h4>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                         <i class="icon-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Iznos porudžbina na čekanju</div>
+                                        <div class="body-text mb-2">Iznos narudžbi na čekanju</div>
                                         <h4>481.34</h4>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Isporučene porudžbine</div>
+                                        <div class="body-text mb-2">Isporučene narudžbe</div>
                                         <h4>0</h4>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                         <i class="icon-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Iznos isporučenih porudžbina</div>
+                                        <div class="body-text mb-2">Iznos isporučenih narudžbi</div>
                                         <h4>0.00</h4>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                         <i class="icon-shopping-bag"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Otkazane porudžbine</div>
+                                        <div class="body-text mb-2">Otkazane narudžbe</div>
                                         <h4>0</h4>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                         <i class="icon-dollar-sign"></i>
                                     </div>
                                     <div>
-                                        <div class="body-text mb-2">Iznos otkazanih porudžbina</div>
+                                        <div class="body-text mb-2">Iznos otkazanih narudžbi</div>
                                         <h4>0.00</h4>
                                     </div>
                                 </div>
@@ -172,7 +172,7 @@
                             <div class="mb-2">
                                 <div class="block-legend">
                                     <div class="dot t2"></div>
-                                    <div class="text-tiny">Porudžbina</div>
+                                    <div class="text-tiny">Narudžbe</div>
                                 </div>
                             </div>
                             <div class="flex items-center gap10">
@@ -192,7 +192,7 @@
 
                 <div class="wg-box">
                     <div class="flex items-center justify-between">
-                        <h5>Nedavne porudžbine</h5>
+                        <h5>Nedavne narudžbe</h5>
                         <div class="dropdown default">
                             <a class="btn btn-secondary dropdown-toggle" href="#">
                                 <span class="view-all">Prikaži sve</span>
@@ -204,7 +204,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style="width: 80px">Redni br.</th>
+                                    <th class="text-center">Id narudžbe</th>
                                     <th class="text-center">Ime i prezime</th>
                                     <th class="text-center">Telefon</th>
                                     <th class="text-center">Iznos bez PDV-a</th>
@@ -212,7 +212,7 @@
                                     <th class="text-center">Ukupno</th>
 
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Datum porudžbine</th>
+                                    <th class="text-center">Datum narudžbe</th>
                                     <th class="text-center">Ukupno proizvoda</th>
                                     <th class="text-center">Datum isporučivanja</th>
                                     <!-- <th></th> -->
@@ -246,11 +246,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
-
-
 @endsection

@@ -41,7 +41,7 @@
                 </div>
                 <div class="order-info">
                     <div class="order-info__item">
-                        <label>Redni br.</label>
+                        <label>Id narudžbe</label>
                         <span>{{$order->id}}</span>
                     </div>
                     <div class="order-info__item">

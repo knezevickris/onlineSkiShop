@@ -124,17 +124,17 @@
                             <li class="menu-item has-children">
                                 <a href="javascript:void(0);" class="menu-item-button">
                                     <div class="icon"><i class="icon-file-plus"></i></div>
-                                    <div class="text">Porudžbine</div>
+                                    <div class="text">Narudžbe</div>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="sub-menu-item">
                                         <a href="{{route('admin.orders')}}" class="">
-                                            <div class="text">Sve porudžbine</div>
+                                            <div class="text">Sve narudžbe</div>
                                         </a>
                                     </li>
                                     <li class="sub-menu-item">
                                         <a href="order-tracking.html" class="">
-                                            <div class="text">Praćenje porudžbina</div>
+                                            <div class="text">Praćenje narudžbi</div>
                                         </a>
                                     </li>
                                 </ul>
