@@ -8,9 +8,11 @@ use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\Slide;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
@@ -19,7 +21,49 @@ use Intervention\Image\Laravel\Facades\Image;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.index');
+        $orders = Order::orderBy('created_at', 'DESC')->get()->take(5);
+        $dashboardDatas = DB::select("Select sum(total) As TotalAmount,
+                                             sum(if(status='ordered', total, 0)) As TotalOrderedAmount,
+                                             sum(if(status='delivered', total, 0)) As TotalDeliveredAmount,
+                                             sum(if(status='canceled', total, 0)) As TotalCanceledAmount,
+                                             Count(*) As Total,
+                                             sum(if(status='ordered', 1, 0)) As TotalOrdered,
+                                             sum(if(status='delivered', 1, 0)) As TotalDelivered,
+                                             sum(if(status='canceled', 1, 0)) As TotalCanceled
+                                             From Orders");
+
+        $monthlyDatas = DB::select("SELECT
+                                            M.id AS MonthNo,
+                                            M.name AS MonthName,
+                                            IFNULL(D.TotalAmount, 0) AS TotalAmount,
+                                            IFNULL(D.TotalOrderedAmount, 0) AS TotalOrderedAmount,
+                                            IFNULL(D.TotalDeliveredAmount, 0) AS TotalDeliveredAmount,
+                                            IFNULL(D.TotalCanceledAmount, 0) AS TotalCanceledAmount
+                                        FROM month_names M
+                                        LEFT JOIN (
+                                            SELECT
+                                                MONTH(created_at) AS MonthNo,
+                                                SUM(total) AS TotalAmount,
+                                                SUM(IF(status='ordered', total, 0)) AS TotalOrderedAmount,
+                                                SUM(IF(status='delivered', total, 0)) AS TotalDeliveredAmount,
+                                                SUM(IF(status='canceled', total, 0)) AS TotalCanceledAmount
+                                            FROM orders
+                                            WHERE YEAR(created_at) = YEAR(NOW())
+                                            GROUP BY YEAR(created_at), MONTH(created_at)
+                                        ) D ON D.MonthNo = M.id
+                                        ORDER BY M.id;");
+
+        $amountM = implode(',', collect($monthlyDatas)->pluck('TotalAmount')->toArray());
+        $orderedAmountM = implode(',', collect($monthlyDatas)->pluck('TotalOrderedAmount')->toArray());
+        $deliveredAmountM = implode(',', collect($monthlyDatas)->pluck('TotalDeliveredAmount')->toArray());
+        $canceledAmountM = implode(',', collect($monthlyDatas)->pluck('TotalCanceledAmount')->toArray());
+
+        $totalAmount = collect($monthlyDatas)->sum("TotalAmount");
+        $totalOrderedAmount = collect($monthlyDatas)->sum("TotalOrderedAmount");
+        $totalDeliveredAmount = collect($monthlyDatas)->sum("TotalDeliveredAmount");
+        $totalCanceledAmount = collect($monthlyDatas)->sum("TotalCanceledAmount");
+
+        return view('admin.index', compact('orders', 'dashboardDatas', 'amountM', 'orderedAmountM', 'deliveredAmountM', 'canceledAmountM', 'totalAmount', 'totalOrderedAmount', 'totalDeliveredAmount', 'totalCanceledAmount'));
     }
 
     public function brands(){
@@ -216,7 +260,7 @@ class AdminController extends Controller
             File::delete(public_path('uploads/categories').'/'.$category->image);
         }
         $category->delete();
-        return redirect()->route('admin.categories')->with('status','Kategorija je uspješno obrisana');
+        return redirect()->route('admin.categories')->with('status','Kategorija je uspješno obrisana.');
     }
 
     //CRUD OPERACIJE ZA RAD SA ARTIKLIMA
@@ -526,8 +570,108 @@ class AdminController extends Controller
         }
 
         return back()->with("status", "Status narudžbe uspješno izmjenjen.");
-
     }
+
+    //CRUD OPERACIJE SA PROMOCIJAMA
+    public function slides(){
+        $slides = Slide::orderBy('id', 'DESC')->paginate(12);
+        return view('admin.slides', compact('slides'));
+    }
+
+    public function slide_add(){
+        return view('admin.slide-add');
+    }
+
+    public function slide_store(Request $request){
+        $request->validate([
+           'tagline'=>'required',
+           'title'=>'required',
+           'subtitle'=>'required',
+           'link'=>'required',
+           'status'=>'required',
+           'image'=>'required|mimes:png,jpeg,jpg|max:2048'
+        ]);
+
+        $slide = new Slide();
+        $slide->tagline = $request->tagline;
+        $slide->title = $request->title;
+        $slide->subtitle = $request->subtitle;
+        $slide->link = $request->link;
+        $slide->status = $request->status;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileExtension = $image->extension();
+            $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
+            $this ->generateSlideThumbnailsImage($image, $fileName);
+            $image->storeAs('slides', $fileName, 'public');
+            $slide->image = $fileName;
+        }
+
+        $slide -> save();
+        return redirect()->route('admin.slides')->with('status', "Promocija je uspješno sačuvana.");
+    }
+
+    public function generateSlideThumbnailsImage($image, $fileName){
+        $destinationPath = public_path('uploads/slides');
+        $img = Image::read($image->path());
+        $img -> cover(400, 690, "top");
+        $img -> resize(400, 690, function ($constraint){
+            $constraint -> aspectRatio();
+        })->save($destinationPath.'/'.$fileName);
+    }
+
+    public function slide_edit($slide_id){
+        $slide = Slide::find($slide_id);
+        return view('admin.slide-edit', compact('slide'));
+    }
+
+    public function slide_update(Request $request){
+        $request->validate([
+            'tagline'=>'required',
+            'title'=>'required',
+            'subtitle'=>'required',
+            'link'=>'required',
+            'status'=>'required',
+            'image'=>'mimes:png,jpeg,jpg|max:2048'
+        ]);
+
+        $slide = Slide::find($request->id);
+
+        $slide->tagline = $request->tagline;
+        $slide->title = $request->title;
+        $slide->subtitle = $request->subtitle;
+        $slide->link = $request->link;
+        $slide->status = $request->status;
+
+        if ($request->hasFile('image')) {
+            if(File::exists(public_path('uploads/slides').'/'.$request->image)){
+                File::delete(public_path('uploads/slides').'/'.$request->image);
+            }
+            $image = $request->file('image');
+            $fileExtension = $image->extension();
+            $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
+            $this ->generateSlideThumbnailsImage($image, $fileName);
+            $image->storeAs('slides', $fileName, 'public');
+            $slide->image = $fileName;
+        }
+
+        $slide -> save();
+        return redirect()->route('admin.slides')->with('status', "Podaci o promociji su uspješno izmjenjeni.");
+    }
+
+    public function slide_delete($slide_id){
+        $slide = Slide::find($slide_id);
+
+        if(File::exists(public_path('uploads/slides').'/'.$slide->image))
+            File::delete(public_path('uploads/slides').'/'.$slide->image);
+
+        $slide->delete();
+
+        return redirect()->route('admin.slides')->with('status', 'Promocija je uspješno obrisana.');
+    }
+
+
 }
 
 

@@ -48,14 +48,12 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-
     Route::get('/admin/brands/', [AdminController::class, 'brands'])->name('admin.brands');
     Route::get('/admin/brand/add', [AdminController::class, 'add_brand']) -> name('admin.brand.add');
     Route::post('/admin/brand/store', [AdminController::class, 'brand_store']) -> name('admin.brand.store');
     Route::get('/admin/brand/edit/{id}', [AdminController::class, 'brand_edit']) -> name('admin.brand.edit');
     Route::put('/admin/brand/update', [AdminController::class, 'brand_update']) -> name('admin.brand.update');
     Route::delete('/admin/brand/{id}/delete',[AdminController::class, 'brand_delete'])->name('admin.brand.delete');
-
 
     Route::get('/admin/categories',[AdminController::class, 'categories'])->name('admin.categories');
     Route::get('/admin/category/add',[AdminController::class, 'category_add'])->name('admin.category.add');
@@ -82,5 +80,13 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/order/{order_id}/details', [AdminController::class, 'order_details'])->name('admin.order.details');
 
     Route::put('/admin/orders/update-status', [AdminController::class, 'update_order_status'])->name('admin.order.status.update');
+
+    Route::get('/admin/slides', [AdminController::class, 'slides'])->name('admin.slides');
+    Route::get('/admin/slide/add', [AdminController::class, 'slide_add'])->name('admin.slide.add');
+    Route::post('/admin/slide/store', [AdminController::class, 'slide_store'])->name('admin.slide.store');
+    Route::get('/admin/slide/{id}/edit', [AdminController::class, 'slide_edit'])->name('admin.slide.edit');
+    Route::put('/admin/slide/update', [AdminController::class, 'slide_update'])->name('admin.slide.update');
+    Route::delete('/admin/slide/{id}/delete',[AdminController::class, 'slide_delete'])->name('admin.slide.delete');
+
 });
 

@@ -30,8 +30,7 @@
             </div>
             <!-- new-category -->
             <div class="wg-box">
-                <form class="form-new-product form-style-1" action="{{route('admin.category.update')}}" method="POST"
-                      enctype="multipart/form-data">
+                <form class="form-new-product form-style-1" action="{{route('admin.category.update')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{$category->id}}"/>
