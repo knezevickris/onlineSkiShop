@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -660,6 +661,7 @@ class AdminController extends Controller
         return redirect()->route('admin.slides')->with('status', "Podaci o promociji su uspješno izmjenjeni.");
     }
 
+    //UPRAVLJANJE KLIJENTSKIM PORUKAMA
     public function slide_delete($slide_id){
         $slide = Slide::find($slide_id);
 
@@ -669,6 +671,17 @@ class AdminController extends Controller
         $slide->delete();
 
         return redirect()->route('admin.slides')->with('status', 'Promocija je uspješno obrisana.');
+    }
+
+    public function contacts(){
+        $contacts = Contact::orderBy('created_at', 'DESC')->paginate(10);
+        return view('admin.contacts', compact('contacts'));
+    }
+
+    public function contact_delete($id){
+        $contact = Contact::find($id);
+        $contact->delete();
+        return redirect()->route('admin.contacts')->with('status', 'Poruka je uspješno obrisana.');
     }
 
 
