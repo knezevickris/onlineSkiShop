@@ -1,10 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <style>
-        body{
-            font-style: normal;
-        }
-    </style>
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <main class="pt-90">

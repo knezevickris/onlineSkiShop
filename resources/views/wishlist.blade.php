@@ -11,8 +11,8 @@
                     <table class="cart-table">
                         <thead>
                         <tr>
-                            <th>Naziv artikla</th>
                             <th></th>
+                            <th>Naziv artikla</th>
                             <th>Cijena</th>
                             <th>Količina</th>
                             <th>Akcije</th>
@@ -24,7 +24,7 @@
                                 <tr>
                                     <td>
                                         <div class="shopping-cart__product-item">
-                                            <img loading="lazy" src="{{asset('uploads/products/thumbnails')}}/{{$item->image}}" width="120" height="120" alt="" />
+                                            <img loading="lazy" src="{{asset('uploads/products/thumbnails')}}/{{$item->model->image}}" width="120" height="120" alt="" />
                                         </div>
                                     </td>
                                     <td>

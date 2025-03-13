@@ -98,7 +98,8 @@ class AdminController extends Controller
             $image = $request->file('image');
             $fileExtension = $image->extension();
             $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
-            $this ->generateBrandThumbnailsImage($image, $fileName);
+            $this->generateThumbnailImage($image, $fileName, 124, 124, 'brands');
+//            $this ->generateBrandThumbnailsImage($image, $fileName);
             $image->storeAs('brands', $fileName, 'public'); // Čuva sliku u storage/app/public/brands
             $brand->image = $fileName;
         }
@@ -109,14 +110,27 @@ class AdminController extends Controller
     }
 
     //POMOCNA FUNKCIJA ZA GENERISANJE SLICICE
-    public  function generateBrandThumbnailsImage($image, $imageName){
-        $destinationPath = public_path('uploads/brands');
+
+    public function generateThumbnailImage($image, $fileName, $width, $height, $folder)
+    {
+        $destinationPath = public_path("uploads/{$folder}");
         $img = Image::read($image->path());
-        $img -> cover(124, 124, "top");
-        $img -> resize(124, 124, function ($constraint){
-           $constraint -> aspectRatio();
-        })->save($destinationPath.'/'.$imageName);
+
+        $img->cover($width, $height, "top");
+        $img->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $fileName);
     }
+
+
+//    public  function generateBrandThumbnailsImage($image, $imageName){
+//        $destinationPath = public_path('uploads/brands');
+//        $img = Image::read($image->path());
+//        $img -> cover(124, 124, "top");
+//        $img -> resize(124, 124, function ($constraint){
+//           $constraint -> aspectRatio();
+//        })->save($destinationPath.'/'.$imageName);
+//    }
 
     public function brand_edit($id){
         $brand = Brand::find($id);
@@ -146,7 +160,8 @@ class AdminController extends Controller
             $image = $request->file('image');
             $fileExtension = $image->extension();
             $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
-            $this ->generateBrandThumbnailsImage($image, $fileName);
+//            $this ->generateBrandThumbnailsImage($image, $fileName);
+            $this->generateThumbnailImage($image, $fileName, 124, 124, 'brands');
             $image->storeAs('brands', $fileName, 'public'); // Čuva sliku u storage/app/public/brands
             $brand->image = $fileName;
         }
@@ -197,7 +212,8 @@ class AdminController extends Controller
             $image = $request->file('image');
             $fileExtension = $image->extension();
             $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
-            $this ->generateCategoryThumbnailsImage($image, $fileName);
+//            $this ->generateCategoryThumbnailsImage($image, $fileName);
+            $this->generateThumbnailImage($image, $fileName, 124, 124, 'categories');
             $image->storeAs('brands', $fileName, 'public'); // Čuva sliku u storage/app/public/brands
             $category->image = $fileName;
         }
@@ -207,14 +223,14 @@ class AdminController extends Controller
         return redirect()->route('admin.categories')->with('status', 'Nova kategorija je uspješno dodata.');
     }
 
-    public  function generateCategoryThumbnailsImage($image, $imageName){
-        $destinationPath = public_path('uploads/categories');
-        $img = Image::read($image->path());
-        $img -> cover(124, 124, "top");
-        $img -> resize(124, 124, function ($constraint){
-            $constraint -> aspectRatio();
-        })->save($destinationPath.'/'.$imageName);
-    }
+//    public  function generateCategoryThumbnailsImage($image, $imageName){
+//        $destinationPath = public_path('uploads/categories');
+//        $img = Image::read($image->path());
+//        $img -> cover(124, 124, "top");
+//        $img -> resize(124, 124, function ($constraint){
+//            $constraint -> aspectRatio();
+//        })->save($destinationPath.'/'.$imageName);
+//    }
 
     public function category_edit($id){
         $category = Category::find($id);
@@ -244,7 +260,8 @@ class AdminController extends Controller
             $image = $request->file('image');
             $fileExtension = $image->extension();
             $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
-            $this ->generateCategoryThumbnailsImage($image, $fileName);
+            $this->generateThumbnailImage($image, $fileName, 124, 124, 'categories');
+//            $this ->generateCategoryThumbnailsImage($image, $fileName);
             $image->storeAs('categories', $fileName, 'public'); // Čuva sliku u storage/app/public/brands
             $category->image = $fileName;
         }
@@ -604,7 +621,7 @@ class AdminController extends Controller
             $image = $request->file('image');
             $fileExtension = $image->extension();
             $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
-            $this ->generateSlideThumbnailsImage($image, $fileName);
+            $this->generateThumbnailImage($image, $fileName, 400, 690, 'slides');
             $image->storeAs('slides', $fileName, 'public');
             $slide->image = $fileName;
         }
@@ -613,14 +630,14 @@ class AdminController extends Controller
         return redirect()->route('admin.slides')->with('status', "Promocija je uspješno sačuvana.");
     }
 
-    public function generateSlideThumbnailsImage($image, $fileName){
-        $destinationPath = public_path('uploads/slides');
-        $img = Image::read($image->path());
-        $img -> cover(400, 690, "top");
-        $img -> resize(400, 690, function ($constraint){
-            $constraint -> aspectRatio();
-        })->save($destinationPath.'/'.$fileName);
-    }
+//    public function generateSlideThumbnailsImage($image, $fileName){
+//        $destinationPath = public_path('uploads/slides');
+//        $img = Image::read($image->path());
+//        $img -> cover(400, 690, "top");
+//        $img -> resize(400, 690, function ($constraint){
+//            $constraint -> aspectRatio();
+//        })->save($destinationPath.'/'.$fileName);
+//    }
 
     public function slide_edit($slide_id){
         $slide = Slide::find($slide_id);
@@ -652,7 +669,8 @@ class AdminController extends Controller
             $image = $request->file('image');
             $fileExtension = $image->extension();
             $fileName = Carbon::now()->timestamp . '.' . $fileExtension;
-            $this ->generateSlideThumbnailsImage($image, $fileName);
+            $this->generateThumbnailImage($image, $fileName, 400, 690, 'slides');
+//            $this ->generateSlideThumbnailsImage($image, $fileName);
             $image->storeAs('slides', $fileName, 'public');
             $slide->image = $fileName;
         }
