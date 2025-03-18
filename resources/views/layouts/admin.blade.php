@@ -66,18 +66,10 @@
 <div id="wrapper">
     <div id="page" class="">
         <div class="layout-wrap">
-
-            <!-- <div id="preload" class="preload-container">
-<div class="preloading">
-    <span></span>
-</div>
-</div> -->
-
             <div class="section-menu-left full-width">
                 <div class="box-logo">
                     <a href="{{route('home.index')}}" id="site-logo-inner">
-                        <img class="" id="logo_header_1" alt="" src="{{asset('images/logo/logo.png')}}"
-                             data-light="{{asset('images/logo/logo.png')}}" data-dark="{{asset('images/logo/logo.png')}}">
+                        <img class="" id="logo_header_1" alt="" src="{{asset('images/logo/logo.png')}}" data-light="{{asset('images/logo/logo.png')}}" data-dark="{{asset('images/logo/logo.png')}}">
                     </a>
                     <div class="button-show-hide">
                         <i class="icon-menu-left"></i>
@@ -85,7 +77,7 @@
                 </div>
                 <div class="center">
                     <div class="center-item">
-                        <div class="center-heading">Main Home</div>
+                        <br><br>
                         <ul class="menu-list">
                             <li class="menu-item">
                                 <a href="{{route('admin.index')}}" class="">
@@ -151,24 +143,11 @@
                                     </li>
                                 </ul>
                             </li>
-
-                            <li class="menu-item has-children">
-                                <a href="javascript:void(0);" class="menu-item-button">
+                            <li class="menu-item">
+                                <a href="{{route('admin.orders')}}" class="menu-item-button">
                                     <div class="icon"><i class="icon-file-plus"></i></div>
                                     <div class="text">Narudžbe</div>
                                 </a>
-                                <ul class="sub-menu">
-                                    <li class="sub-menu-item">
-                                        <a href="{{route('admin.orders')}}" class="">
-                                            <div class="text">Sve narudžbe</div>
-                                        </a>
-                                    </li>
-                                    <li class="sub-menu-item">
-                                        <a href="order-tracking.html" class="">
-                                            <div class="text">Praćenje narudžbi</div>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                             <li class="menu-item">
                                 <a href="{{route('admin.slides')}}" class="">
@@ -189,19 +168,19 @@
                                 </a>
                             </li>
 
-                            <li class="menu-item">
-                                <a href="users.html" class="">
-                                    <div class="icon"><i class="icon-user"></i></div>
-                                    <div class="text">Korisnik</div>
-                                </a>
-                            </li>
+{{--                            <li class="menu-item">--}}
+{{--                                <a href="users.html" class="">--}}
+{{--                                    <div class="icon"><i class="icon-user"></i></div>--}}
+{{--                                    <div class="text">Korisnik</div>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
 
-                            <li class="menu-item">
-                                <a href="settings.html" class="">
-                                    <div class="icon"><i class="icon-settings"></i></div>
-                                    <div class="text">Podešavanja</div>
-                                </a>
-                            </li>
+{{--                            <li class="menu-item">--}}
+{{--                                <a href="settings.html" class="">--}}
+{{--                                    <div class="icon"><i class="icon-settings"></i></div>--}}
+{{--                                    <div class="text">Podešavanja</div>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                             <li class="menu-item">
                                 <form method="POST" action="{{route('logout')}}" id="logout-form">
                                     @csrf
@@ -216,20 +195,15 @@
                 </div>
             </div>
             <div class="section-content-right">
-
                 <div class="header-dashboard">
                     <div class="wrap">
                         <div class="header-left">
-                            <a href="index-2.html">
-                                <img class="" id="logo_header_mobile" alt="" src="{{asset('images/logo/logo.png')}}"
-                                     data-light="images/logo/logo.png" data-dark="images/logo/logo.png"
-                                     data-width="154px" data-height="52px" data-retina="images/logo/logo.png">
+                            <a href="{{route('home.index')}}">
+                                <img class="" id="logo_header_mobile" alt="" src="{{asset('images/logo/logo.png')}}" data-light="images/logo/logo.png" data-dark="images/logo/logo.png" data-width="154px" data-height="52px" data-retina="images/logo/logo.png">
                             </a>
                             <div class="button-show-hide">
                                 <i class="icon-menu-left"></i>
                             </div>
-
-
                             <form class="form-search flex-grow">
                                 <fieldset class="name">
                                     <input type="text" placeholder="Pretraži..." id="search-input" class="show-search" name="name" autocomplete="off" tabindex="2" value="" aria-required="true" required="">
@@ -242,152 +216,30 @@
                                     </ul>
                                 </div>
                             </form>
-
                         </div>
-                        <div class="header-grid">
-
-                            <div class="popup-wrap message type-header">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="header-item">
-                                                <span class="text-tiny">1</span>
-                                                <i class="icon-bell"></i>
-                                            </span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end has-content"
-                                        aria-labelledby="dropdownMenuButton2">
-                                        <li>
-                                            <h6>Notifications</h6>
-                                        </li>
-                                        <li>
-                                            <div class="message-item item-1">
-                                                <div class="image">
-                                                    <i class="icon-noti-1"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="body-title-2">Discount available</div>
-                                                    <div class="text-tiny">Morbi sapien massa, ultricies at rhoncus
-                                                        at, ullamcorper nec diam</div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="message-item item-2">
-                                                <div class="image">
-                                                    <i class="icon-noti-2"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="body-title-2">Account has been verified</div>
-                                                    <div class="text-tiny">Mauris libero ex, iaculis vitae rhoncus
-                                                        et</div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="message-item item-3">
-                                                <div class="image">
-                                                    <i class="icon-noti-3"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="body-title-2">Order shipped successfully</div>
-                                                    <div class="text-tiny">Integer aliquam eros nec sollicitudin
-                                                        sollicitudin</div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="message-item item-4">
-                                                <div class="image">
-                                                    <i class="icon-noti-4"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="body-title-2">Order pending: <span>ID 305830</span>
-                                                    </div>
-                                                    <div class="text-tiny">Ultricies at rhoncus at ullamcorper</div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li><a href="#" class="tf-button w-full">View all</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-
-
-
+                        <div class="header-grid" style="padding-right: 30px">
                             <div class="popup-wrap user type-header">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="header-user wg-user">
-                                                <span class="image">
-                                                    <img src="{{asset('images/avatar/user-1.png')}}" alt="">
-                                                </span>
-                                                <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Kristin Watson</span>
-                                                    <span class="text-tiny">Admin</span>
-                                                </span>
-                                            </span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end has-content"
-                                        aria-labelledby="dropdownMenuButton3">
-                                        <li>
-                                            <a href="#" class="user-item">
-                                                <div class="icon">
-                                                    <i class="icon-user"></i>
-                                                </div>
-                                                <div class="body-title-2">Nalog</div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="user-item">
-                                                <div class="icon">
-                                                    <i class="icon-mail"></i>
-                                                </div>
-                                                <div class="body-title-2">Inbox</div>
-                                                <div class="number">27</div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="user-item">
-                                                <div class="icon">
-                                                    <i class="icon-file-text"></i>
-                                                </div>
-                                                <div class="body-title-2">Taskboard</div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="user-item">
-                                                <div class="icon">
-                                                    <i class="icon-headphones"></i>
-                                                </div>
-                                                <div class="body-title-2">Support</div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('logout')}}" class="user-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                                <div class="icon">
-                                                    <i class="icon-log-out"></i>
-                                                </div>
-                                                <div class="body-title-2">Odjava</div>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <span class="header-user wg-user">
+                                        <span class="image">
+                                            <img src="{{asset('images/avatar/admin.jpg')}}" alt="">
+                                        </span>
+                                        <span class="flex flex-column">
+                                            <span class="body-title mb-2">{{Auth::user()->name}}</span>
+                                            <span class="text-tiny">Administrator</span>
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
                 <div class="main-content">
                     @yield('content');
-
                     <div class="bottom-page">
                         <div class="body-text">Copyright © 2025 skiXperience</div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

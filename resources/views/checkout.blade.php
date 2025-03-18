@@ -30,6 +30,12 @@
           </span>
                 </a>
             </div>
+            <br><br>
+            @if(Session::has('error'))
+                <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
             <form name="checkout-form" action="{{route('cart.place.an.order')}}" method="POST" onsubmit="console.log('Form submitted!')">
                 @csrf
                 <div class="checkout-form">
@@ -41,25 +47,25 @@
                             <div class="col-6">
                             </div>
                         </div>
-                        @if($address)
-                            <div class="row">
-                               <div class="col-md-12">
-                                   <div class="my-account__address-list">
-                                       <div class="my-account__address-list-item">
-                                           <div class="my-account__address-item_details">
-                                                <p>{{$address->name}}</p>
-                                                <p>{{$address->address}}</p>
-                                                <p>{{$address->city}}, {{$address->country}}</p>
-                                                <p>{{$address->zip}}</p>
-                                           <br/>
-                                               <p>{{$address->phone}}</p>
-                                               <p>{{$address->email}}</p>
-                                           </div>
-                                        </div>
-                                   </div>
-                               </div>
-                            </div>
-                        @else
+{{--                        @if($address)--}}
+{{--                            <div class="row">--}}
+{{--                               <div class="col-md-12">--}}
+{{--                                   <div class="my-account__address-list">--}}
+{{--                                       <div class="my-account__address-list-item">--}}
+{{--                                           <div class="my-account__address-item_details">--}}
+{{--                                                <p>{{$address->name}}</p>--}}
+{{--                                                <p>{{$address->address}}</p>--}}
+{{--                                                <p>{{$address->city}}, {{$address->country}}</p>--}}
+{{--                                                <p>{{$address->zip}}</p>--}}
+{{--                                           <br/>--}}
+{{--                                               <p>{{$address->phone}}</p>--}}
+{{--                                               <p>{{$address->email}}</p>--}}
+{{--                                           </div>--}}
+{{--                                        </div>--}}
+{{--                                   </div>--}}
+{{--                               </div>--}}
+{{--                            </div>--}}
+{{--                        @else--}}
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <div class="form-floating my-3">
@@ -118,7 +124,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+{{--                        @endif--}}
                     </div>
                     <div class="checkout__totals-wrapper">
                         <div class="sticky-content">

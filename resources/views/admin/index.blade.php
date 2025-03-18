@@ -19,8 +19,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="wg-chart-default mb-20">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap14">
@@ -34,8 +32,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="wg-chart-default mb-20">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap14">
@@ -49,8 +45,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="wg-chart-default">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap14">
@@ -64,11 +58,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                     <div class="w-half">
-
                         <div class="wg-chart-default mb-20">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap14">
@@ -82,8 +73,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="wg-chart-default mb-20">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap14">
@@ -97,8 +86,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="wg-chart-default mb-20">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap14">

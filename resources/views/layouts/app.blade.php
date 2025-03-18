@@ -259,7 +259,18 @@
     </symbol>
   </svg>
   <style>
-    #header {
+      html, body {
+          height: 100%;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .content-wrapper {
+          flex: 1;
+      }
+
+      #header {
       padding-top: 8px;
       padding-bottom: 8px;
     }
@@ -318,33 +329,15 @@
         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <use href="#icon_cart" />
         </svg>
-        <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
+          @if(Cart::instance('cart')->content()->count() > 0)
+              <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
+          @endif
       </a>
     </div>
 
-    <nav
-      class="header-mobile__navigation navigation d-flex flex-column w-100 position-absolute top-100 bg-body overflow-auto">
-      <div class="container">
-        <form action="#" method="GET" class="search-field position-relative mt-4 mb-3">
-          <div class="position-relative">
-            <input class="search-field__input w-100 border rounded-1" type="text" name="search-keyword"
-              placeholder="Pretraži..." />
-            <button class="btn-icon search-popup__submit pb-0 me-2" type="submit">
-              <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_search" />
-              </svg>
-            </button>
-            <button class="btn-icon btn-close-lg search-popup__reset pb-0 me-2" type="reset"></button>
-          </div>
-
-          <div class="position-absolute start-0 top-100 m-0 w-100">
-            <div class="search-result"></div>
-          </div>
-        </form>
-      </div>
-
-      <div class="container">
+    <nav class="header-mobile__navigation navigation d-flex flex-column w-100 position-absolute top-100 bg-body overflow-auto">
+        <br><br>
+        <div class="container">
         <div class="overflow-hidden">
           <ul class="navigation__list list-unstyled position-relative">
             <li class="navigation__item">
@@ -357,7 +350,7 @@
               <a href="{{route('cart.index')}}" class="navigation__link">Korpa</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">O nama</a>
+              <a href="{{route('home.about')}}" class="navigation__link">O nama</a>
             </li>
             <li class="navigation__item">
               <a href="{{route('home.contact')}}" class="navigation__link">Kontakt</a>
@@ -365,61 +358,14 @@
           </ul>
         </div>
       </div>
-
       <div class="border-top mt-auto pb-2">
         <div class="customer-links container mt-4 mb-2 pb-1">
-          <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+          <svg class="d-inline-block align-middle" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_user" />
           </svg>
-          <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">Moj nalog</span>
+          <span class="d-inline-block ms-2 text-uppercase align-middle fw-medium">
+              <a href="{{route('user.index')}}" class="navigation__link">Moj nalog</a></span>
         </div>
-
-
-
-        <ul class="container social-links list-unstyled d-flex flex-wrap mb-0">
-          <li>
-            <a href="#" class="footer__social-link d-block ps-0">
-              <svg class="svg-icon svg-icon_facebook" width="9" height="15" viewBox="0 0 9 15"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_facebook" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="footer__social-link d-block">
-              <svg class="svg-icon svg-icon_twitter" width="14" height="13" viewBox="0 0 14 13"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_twitter" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="footer__social-link d-block">
-              <svg class="svg-icon svg-icon_instagram" width="14" height="13" viewBox="0 0 14 13"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_instagram" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="footer__social-link d-block">
-              <svg class="svg-icon svg-icon_youtube" width="16" height="11" viewBox="0 0 16 11"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.0117 1.8584C14.8477 1.20215 14.3281 0.682617 13.6992 0.518555C12.5234 0.19043 7.875 0.19043 7.875 0.19043C7.875 0.19043 3.19922 0.19043 2.02344 0.518555C1.39453 0.682617 0.875 1.20215 0.710938 1.8584C0.382812 3.00684 0.382812 5.46777 0.382812 5.46777C0.382812 5.46777 0.382812 7.90137 0.710938 9.07715C0.875 9.7334 1.39453 10.2256 2.02344 10.3896C3.19922 10.6904 7.875 10.6904 7.875 10.6904C7.875 10.6904 12.5234 10.6904 13.6992 10.3896C14.3281 10.2256 14.8477 9.7334 15.0117 9.07715C15.3398 7.90137 15.3398 5.46777 15.3398 5.46777C15.3398 5.46777 15.3398 3.00684 15.0117 1.8584ZM6.34375 7.68262V3.25293L10.2266 5.46777L6.34375 7.68262Z" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="footer__social-link d-block">
-              <svg class="svg-icon svg-icon_pinterest" width="14" height="15" viewBox="0 0 14 15"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_pinterest" />
-              </svg>
-            </a>
-          </li>
-        </ul>
       </div>
     </nav>
   </div>
@@ -446,7 +392,7 @@
               <a href="{{route('cart.index')}}" class="navigation__link">Korpa</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">O nama</a>
+              <a href="{{route('home.about')}}" class="navigation__link">O nama</a>
             </li>
             <li class="navigation__item">
               <a href="{{route('home.contact')}}" class="navigation__link">Kontakt</a>
@@ -458,8 +404,7 @@
           <div class="header-tools__item hover-container">
             <div class="js-hover__open position-relative">
               <a class="js-search-popup search-field__actor" href="#">
-                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
+                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <use href="#icon_search" />
                 </svg>
                 <i class="btn-icon btn-close-lg"></i>
@@ -478,7 +423,6 @@
                   </button>
                   <button class="btn-icon btn-close-lg search-popup__reset" type="reset"></button>
                 </div>
-
                 <div class="search-popup__results">
                   <ul id="box-content-search"></ul>
                 </div>
@@ -486,25 +430,22 @@
             </div>
           </div>
             @guest
-          <div class="header-tools__item hover-container">
-            <a href="{{ route('login') }}" class="header-tools__item">
-              <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <use href="#icon_user" />
-              </svg>
-            </a>
-          </div>
-            @else
-                <div class="header-tools__item hover-container">
-                <a href="{{Auth::user()->utype==='ADM' ? route('admin.index') : route('user.index') }}" class="header-tools__item">
-                    <span class="pr-6px">{{ Auth::user()->name }}</span>
-                    <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_user" />
-                    </svg>
+              <div class="header-tools__item hover-container">
+                <a href="{{ route('login') }}" class="header-tools__item">
+                  <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <use href="#icon_user" />
+                  </svg>
                 </a>
-            </div>
-
+              </div>
+                @else
+                    <div class="header-tools__item hover-container">
+                    <a href="{{Auth::user()->utype==='ADM' ? route('admin.index') : route('user.index') }}" class="header-tools__item">
+                        <span class="pr-6px">{{ Auth::user()->name }}</span>
+                        <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <use href="#icon_user" />
+                        </svg>
+                    </a>
+                </div>
             @endguest
 
           <a href="{{route('wishlist.index')}}" class="header-tools__item header-tools__cart">
@@ -515,10 +456,8 @@
                   <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
               @endif
           </a>
-
           <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart">
-            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_cart" />
             </svg>
               @if(Cart::instance('cart')->content()->count() > 0)
@@ -530,160 +469,51 @@
     </div>
   </header>
 
-  @yield("content")
+  <div class="content-wrapper">
+    @yield("content")
+  </div>
 
 
   <hr class="mt-5 text-secondary" />
   <footer class="footer footer_type_2">
-    <div class="footer-middle container">
-      <div class="row row-cols-lg-5 row-cols-2">
-        <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
-          <div class="logo">
-            <a href="{{route('home.index')}}">
-              <img src="{{ asset('assets/images/logo.png') }}" alt="skiXperience Logo" class="logo__image d-block" />
-            </a>
-          </div>
-          <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-          <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-          <p><strong class="fw-medium">+1 000-000-0000</strong></p>
-
-          <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_facebook" width="9" height="15" viewBox="0 0 9 15"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_facebook" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_twitter" width="14" height="13" viewBox="0 0 14 13"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_twitter" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_instagram" width="14" height="13" viewBox="0 0 14 13"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_instagram" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_youtube" width="16" height="11" viewBox="0 0 16 11"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M15.0117 1.8584C14.8477 1.20215 14.3281 0.682617 13.6992 0.518555C12.5234 0.19043 7.875 0.19043 7.875 0.19043C7.875 0.19043 3.19922 0.19043 2.02344 0.518555C1.39453 0.682617 0.875 1.20215 0.710938 1.8584C0.382812 3.00684 0.382812 5.46777 0.382812 5.46777C0.382812 5.46777 0.382812 7.90137 0.710938 9.07715C0.875 9.7334 1.39453 10.2256 2.02344 10.3896C3.19922 10.6904 7.875 10.6904 7.875 10.6904C7.875 10.6904 12.5234 10.6904 13.6992 10.3896C14.3281 10.2256 14.8477 9.7334 15.0117 9.07715C15.3398 7.90137 15.3398 5.46777 15.3398 5.46777C15.3398 5.46777 15.3398 3.00684 15.0117 1.8584ZM6.34375 7.68262V3.25293L10.2266 5.46777L6.34375 7.68262Z" />
-                </svg>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="footer__social-link d-block">
-                <svg class="svg-icon svg-icon_pinterest" width="14" height="15" viewBox="0 0 14 15"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <use href="#icon_pinterest" />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Company</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About Us</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
-            <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a></li>
-            <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact Us</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Shop</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a></li>
-            <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a></li>
-            <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
-            <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
-            <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Help</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a></li>
-            <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My Account</a>
-            </li>
-            <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
-            </li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column footer-menu mb-4 mb-lg-0">
-          <h6 class="sub-menu__title text-uppercase">Categories</h6>
-          <ul class="sub-menu__list list-unstyled">
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
-            <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
     <div class="footer-bottom">
       <div class="container d-md-flex align-items-center">
-        <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+        <span class="footer-copyright me-auto">©2025 skiXperience</span>
         <div class="footer-settings d-md-flex align-items-center">
-          <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
-            Conditions</a>
+          <a href="privacy-policy.html">Politika privatnosti</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp; Conditions</a>
         </div>
       </div>
     </div>
   </footer>
-
-
   <footer class="footer-mobile container w-100 px-5 d-md-none bg-body">
     <div class="row text-center">
       <div class="col-4">
         <a href="{{route('home.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
-          <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+          <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_home" />
           </svg>
-          <span>Home</span>
+          <span>Početak</span>
         </a>
       </div>
-
       <div class="col-4">
-        <a href="{{route('home.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
-          <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+        <a href="{{route('shop.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
+          <svg class="d-block" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <use href="#icon_hanger" />
           </svg>
-          <span>Shop</span>
+          <span>Prodavnica</span>
         </a>
       </div>
-
       <div class="col-4">
-        <a href="{{route('home.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
+        <a href="{{route('wishlist.index')}}" class="footer-mobile__link d-flex flex-column align-items-center">
           <div class="position-relative">
-            <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+            <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_heart" />
             </svg>
-            <span class="wishlist-amount d-block position-absolute js-wishlist-count">3</span>
+              @if(Cart::instance('wishlist')->content()->count() > 0)
+                  <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
+              @endif
           </div>
-          <span>Wishlist</span>
+          <span>Omiljeno</span>
         </a>
       </div>
     </div>
@@ -742,5 +572,4 @@
 
   @stack("scripts");
 </body>
-
 </html>

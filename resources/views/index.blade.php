@@ -119,29 +119,6 @@
         <h2>Sezonsko sniženje</h2>
         <h2 class="fw-bold">popusti do -50%</h2>
           <a href="{{route('shop.index')}}" class="btn-link default-underline text-uppercase fw-medium mt-3">Prikaži sve</a>
-
-          {{--        <div class="position-relative d-flex align-items-center text-center pt-xxl-4 js-countdown mb-3"--}}
-{{--          data-date="18-3-2024" data-time="06:50">--}}
-{{--          <div class="day countdown-unit">--}}
-{{--            <span class="countdown-num d-block"></span>--}}
-{{--            <span class="countdown-word text-uppercase text-secondary">Days</span>--}}
-{{--          </div>--}}
-
-{{--          <div class="hour countdown-unit">--}}
-{{--            <span class="countdown-num d-block"></span>--}}
-{{--            <span class="countdown-word text-uppercase text-secondary">Hours</span>--}}
-{{--          </div>--}}
-
-{{--          <div class="min countdown-unit">--}}
-{{--            <span class="countdown-num d-block"></span>--}}
-{{--            <span class="countdown-word text-uppercase text-secondary">Mins</span>--}}
-{{--          </div>--}}
-
-{{--          <div class="sec countdown-unit">--}}
-{{--            <span class="countdown-num d-block"></span>--}}
-{{--            <span class="countdown-word text-uppercase text-secondary">Sec</span>--}}
-{{--          </div>--}}
-{{--        </div>--}}
       </div>
       <div class="col-md-6 col-lg-8 col-xl-80per">
         <div class="position-relative">

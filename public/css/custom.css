@@ -42,7 +42,7 @@ body {
 }
 
 .swal-footer {
-    text-align: center;
+    text-align: center !important;
 }
 
 .table-bordered>:not(caption)>*>* {
@@ -120,7 +120,7 @@ body {
 }
 
 .swal-footer {
-    text-align: center;
+    text-align: center !important;
 }
 
 .table-bordered>:not(caption)>*>* {

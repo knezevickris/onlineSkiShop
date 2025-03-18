@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -114,17 +115,15 @@ class CartController extends Controller
             return redirect()->route('login');
         }
 
-        $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
-        return view('checkout', compact('address'));
+        return  view('checkout');
+//        $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
+//        return view('checkout', compact('address'));
     }
 
 
     public function place_an_order(Request $request){
-        $userId = Auth::user()->id;
-        $address = Address::where('user_id', $userId)->where('isdefault', true)->first();
 
-        if($address == null){
-//            $request->validate([
+//         $request->validate([
 //               'name'=>'required|max:250',
 //                'address'=>'required',
 //                'phone'=>'required|numeric',
@@ -134,9 +133,18 @@ class CartController extends Controller
 //                'customer_note' => 'sometimes|string'
 //          ]);
 
+        if($request->mode == 'card'){
+            return redirect()->back()->with('error', 'Trenutno nije moguće izvršiti plaćanje karticom. Molimo odaberite drugi način plaćanja.');
+        }
+        elseif($request->mode == 'paypal'){
+            return redirect()->back()->with('error', 'Trenutno nije moguće izvršiti plaćanje putem PayPal-a. Molimo odaberite drugi način plaćanja.');
+        }
 
+        $userId = Auth::user()->id;
+//        $address = Address::where('user_id', $userId)->where('isdefault', true)->first();
 
-            $address = new Address();
+        $address = new Address();
+
             $address->name = $request->name;
             $address->address = $request->address;
             $address->phone = $request->phone;
@@ -147,7 +155,7 @@ class CartController extends Controller
             $address->isdefault = true;
 
             $address->save();
-        }
+
         $this->setAmountForCheckout();
 
         $subtotal = str_replace(',', '', Session::get('checkout')['subtotal']);
@@ -166,45 +174,57 @@ class CartController extends Controller
         $order->total = $total;
         $order->name = $address->name;
         $order->phone = $address->phone;
-        $order->email = Auth::user()->email;
+//        $order->email = Auth::user()->email;
+        $order->email = $request->email;
         $order->address = $address->address;
         $order->city = $address->city;
         $order->country = $address->country;
         $order->zip = $address->zip;
         $order->customer_note = $request->customer_note;
 
+        if (Session::has('coupon')) {
+            $order->coupon_code = Session::get('coupon')['code'];
+            $order->discount = Session::get('checkout')['discount'];
+        }
+
         $order->save();
 
         foreach (Cart::instance('cart')->content() as $item){
+            $product = Product::find($item->id);
+
+            if ($product->quantity < $item->qty) {
+                return redirect()->back()->with('error', 'Nema dovoljno proizvoda na stanju!');
+            }
+
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
             $orderItem->save();
-        }
 
-        if($request->mode == 'card'){
+            $product->quantity -= $item->qty;
+            $product->save();
+            Log::info('Product: '.$product->quantity);
+            Log::info('OrderItem: '.$orderItem->quantity);
 
         }
-        elseif($request->mode == 'paypal'){
+        Log::info('Order: '.$order->id);
 
+        if($request->mode == 'cod') {
+                $transaction = new Transaction();
+                $transaction->order_id = $order->id;
+                $transaction->user_id = $userId;
+                $transaction->mode = $request->mode;
+                $transaction->status = "pending";
+                $transaction->save();
         }
-        elseif($request->mode == 'cod') {
-            $transaction = new Transaction();
-            $transaction->order_id = $order->id;
-            $transaction->user_id = $userId;
-            $transaction->mode = $request->mode;
-            $transaction->status = "pending";
-            $transaction->save();
-        }
-        else;
-
 
         Cart::instance('cart')->destroy();
         Session::forget('checkout');
         Session::forget('coupon');
         Session::forget('discount');
+        Session::forget('discounts');
         Session::put('order_id', $order->id);
 
         return redirect()->route('cart.order.confirmation');
