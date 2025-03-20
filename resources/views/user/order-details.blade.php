@@ -180,7 +180,6 @@
                                     <th class="text-center">Brend</th>
                                     <th class="text-center">Opcije</th>
                                     <th class="text-center">Povrat</th>
-                                    {{--                            <th class="text-center">Akcije</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -202,13 +201,6 @@
                                         <td class="text-center">{{$orderItem -> product -> brand -> name}}</td>
                                         <td class="text-center">{{$orderItem -> options}}</td>
                                         <td class="text-center">{{$orderItem -> rstatus == 0 ? 'Ne' : 'Da'}}</td>
-                                        {{--                                    <td class="text-center">--}}
-                                        {{--                                        <div class="list-icon-function view-icon">--}}
-                                        {{--                                            <div class="item eye">--}}
-                                        {{--                                                <i class="icon-eye"></i>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                    </td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>

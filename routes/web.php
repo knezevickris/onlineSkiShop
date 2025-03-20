@@ -16,6 +16,8 @@ Auth::routes();
 Route::get('/',[HomeController::class, 'index']) -> name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product_slug}',[ShopController::class, 'product_details'])->name('shop.product.details');
+Route::get('/shop/gender/{gender}', [HomeController::class, 'shop_by_gender'])->name('shop.gender');
+
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
@@ -43,6 +45,8 @@ Route::post('/contact/store', [HomeController::class, 'contact_store'])->name('h
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
 Route::get('/about-us', [HomeController::class, 'about_us'])->name('home.about');
+Route::get('/privacy-policy', [HomeController::class, 'privacy_policy'])->name('home.privacy');
+Route::get('/terms-and-conditions', [HomeController::class, 'terms_and_conditions'])->name('home.terms');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');

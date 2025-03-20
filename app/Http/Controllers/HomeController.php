@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Product;
@@ -50,5 +51,33 @@ class HomeController extends Controller
 
     public function about_us(){
         return view('about');
+    }
+
+    public function privacy_policy(){
+        return view('privacy-policy');
+    }
+
+    public function terms_and_conditions(){
+        return view('terms-and-conditions');
+    }
+
+    public function shop_by_gender($gender){
+        $categories = Category::all();
+        $f_categories = Category::all();
+        $brands = Brand::all();
+        $f_brands = Brand::all();
+//        $products = Product::where('gender', $gender)->paginate(12);
+        $minPrice = "0";
+        $maxPrice = "9999";
+        $size = "12";
+        $order = "-1";
+        if ($gender == 'F') {
+            $products = Product::whereIn('gender', ['F', 'U'])->paginate(10);
+        } elseif ($gender == 'M') {
+            $products = Product::whereIn('gender', ['M', 'U'])->paginate(10);
+        } else {
+            $products = Product::paginate(10);
+        }
+        return view('shop', compact('products', 'categories', 'f_categories', 'brands', 'f_brands', 'minPrice', 'maxPrice', 'size', 'order'));
     }
 }

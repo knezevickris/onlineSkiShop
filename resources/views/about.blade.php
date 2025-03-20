@@ -10,12 +10,12 @@
                     </div>
                     <div class="card-body">
                         <p class="text-center">
-                            Dobrodošli u <strong>SkiXperience</strong>, vašu pouzdanu platformu za kupovinu  ski opreme!
+                            Dobrodošli u <strong> skiXperience</strong>, vašu pouzdanu platformu za kupovinu  ski opreme!
                         </p>
 
                         <h4>Ko smo mi?</h4>
                         <p>
-                            SkiXperience je nastao iz ljubavi prema zimskim sportovima i želje da skijašima svih nivoa omogućimo jednostavno i sigurno iskustvo kupovine ski opreme. Bilo da ste početnik ili iskusan skijaš, naša aplikacija vam pruža sve što vam je potrebno za savršen boravak na snijegu.
+                            skiXperience je nastao iz ljubavi prema zimskim sportovima i želje da skijašima svih nivoa omogućimo jednostavno i sigurno iskustvo kupovine ski opreme. Bilo da ste početnik ili iskusan skijaš, naša aplikacija vam pruža sve što vam je potrebno za savršen boravak na snijegu.
                         </p>
 
                         <h4>Naša misija</h4>
@@ -42,12 +42,12 @@
                         <p>Imate pitanje? Rado ćemo vam pomoći!</p>
                         <ul>
                             <li>📧 Email: <a href="mailto:support@skixperience.com">support@skixperience.com</a></li>
-                            <li>📞 Telefon: +387 61 123 456</li>
-                            <li>📍 Adresa: Sarajevo, BiH</li>
+                            <li>📞 Telefon: +387 57 123 456</li>
+                            <li>📍 Adresa: Istočno Sarajevo, BiH</li>
                         </ul>
 
                         <p class="text-center">
-                            Pridružite se SkiXperience zajednici i spremite se za nezaboravnu zimsku avanturu! ⛷❄
+                            Pridružite se skiXperience zajednici i spremite se za nezaboravnu zimsku avanturu! ⛷❄
                         </p>
                     </div>
                 </div>

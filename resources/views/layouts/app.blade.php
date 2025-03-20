@@ -480,7 +480,7 @@
       <div class="container d-md-flex align-items-center">
         <span class="footer-copyright me-auto">©2025 skiXperience</span>
         <div class="footer-settings d-md-flex align-items-center">
-          <a href="privacy-policy.html">Politika privatnosti</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp; Conditions</a>
+          <a href="{{route('home.privacy')}}">Politika privatnosti</a> &nbsp;|&nbsp; <a href="{{route('home.terms')}}">Terms &amp; Conditions</a>
         </div>
       </div>
     </div>

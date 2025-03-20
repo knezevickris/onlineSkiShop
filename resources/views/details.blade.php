@@ -60,15 +60,6 @@
                             <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
                             <a href="{{route('shop.index')}}" class="menu-link menu-link_us-s text-uppercase fw-medium">Prodavnica</a>
                         </div><!-- /.breadcrumb -->
-                        <div
-                            class="product-single__prev-next d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
-                            <a href="#" class="text-uppercase fw-medium"><svg width="10" height="10" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_prev_md" />
-                                </svg><span class="menu-link menu-link_us-s">Prethodni</span></a>
-                            <a href="#" class="text-uppercase fw-medium"><span class="menu-link menu-link_us-s">Naredni</span><svg width="10" height="10" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_next_md" />
-                                </svg></a>
-                        </div><!-- /.shop-acs -->
                     </div>
                     <h1 class="product-single__name" style="color: darkblue">{{$product->name}}</h1>
                     <br><br>
@@ -92,6 +83,16 @@
                         @if(Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
                             <a href="{{route('cart.index')}}" class="btn btn-warning mb-3">U korpi</a>
                         @else
+                            <div class="form-group">
+                                    <label for="size">Izaberite veličinu:</label><br>
+                                    <select name="size" id="size" class="form-control">
+                                        <option value="S" {{ old('size') == 'S' ? 'selected' : '' }}>S</option>
+                                        <option value="M" {{ old('size') == 'M' ? 'selected' : '' }}>M</option>
+                                        <option value="L" {{ old('size') == 'L' ? 'selected' : '' }}>L</option>
+                                        <option value="XL" {{ old('size') == 'XL' ? 'selected' : '' }}>XL</option>
+                                    </select>
+                                <br>
+                            </div>
                             <form name="addtocart-form" method="post" action="{{route('cart.add')}}">
                                 @csrf
                                 @method('POST')
@@ -104,6 +105,7 @@
                                     <input type="hidden" name="id" value="{{$product->id}}">
                                     <input type="hidden" name="name" value="{{$product->name}}">
                                     <input type="hidden" name="price" value="{{$product->sale_price == ''? $product->regular_price : $product->sale_price}}">
+                                    <input type="hidden" name="size" id="selected-size" value="">
                                     <button type="submit" class="btn btn-primary btn-addtocart" data-aside="cartDrawer">Dodaj u korpu</button>
                                 </div>
                             </form>
@@ -143,8 +145,16 @@
                             <span>{{$product->category->name}}</span>
                         </div>
                         <div class="meta-item">
-                            <label>Tags:</label>
-                            <span>NA</span>
+                            <label>Pol:</label>
+                            <span>
+                                @if($product->gender == 'F')
+                                    Ženski
+                                @elseif($product->gender == 'M')
+                                    Muški
+                                @else
+                                    Unisex
+                                @endif
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -297,6 +307,12 @@
 
         </section><!-- /.products-carousel container -->
     </main>
-
-
 @endsection
+
+@push('scripts')
+    <script>
+        document.getElementById("size").addEventListener("change", function() {
+            document.getElementById("selected-size").value = this.value;
+        });
+    </script>
+@endpush

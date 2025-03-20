@@ -48,6 +48,14 @@
                     @include('user.account-nav')
                 </div>
                 <div class="col-lg-10">
+                    <br>
+                    @if($orders->isEmpty())
+                        <div class="text-center my-5">
+                            <h4 class="text-muted">Istorija narudžbi je prazna.</h4>
+                            <p class="text-secondary">Napravite vašu prvu narudžbu i istražite našu ponudu!</p>
+                            <a href="{{ route('shop.index') }}" class="btn btn-primary">Idi u prodavnicu</a>
+                        </div>
+                    @else
                     <div class="wg-table table-all-user">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered">
@@ -110,12 +118,12 @@
                             </table>
                         </div>
                     </div>
+                    @endif
                     <div class="divider"></div>
                     <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
                     {{$orders->links('pagination::bootstrap-5')}}
                     </div>
                 </div>
-
             </div>
         </section>
     </main>

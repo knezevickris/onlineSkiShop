@@ -28,7 +28,7 @@ class CartController extends Controller
 
     public function add_to_cart(Request $request)
     {
-        Cart::instance('cart')->add($request->id, $request->name, $request->quantity, $request->price)->associate('\App\Models\Product');
+        Cart::instance('cart')->add($request->id, $request->name, $request->quantity, $request->price, ['size' => $request->size ?? ''])->associate('\App\Models\Product');
         return redirect()->back();
     }
 
@@ -145,16 +145,16 @@ class CartController extends Controller
 
         $address = new Address();
 
-            $address->name = $request->name;
-            $address->address = $request->address;
-            $address->phone = $request->phone;
-            $address->city = $request->city;
-            $address->country = $request->country;
-            $address->zip = $request->zip;
-            $address->user_id = $userId;
-            $address->isdefault = true;
+        $address->name = $request->name;
+        $address->address = $request->address;
+        $address->phone = $request->phone;
+        $address->city = $request->city;
+        $address->country = $request->country;
+        $address->zip = $request->zip;
+        $address->user_id = $userId;
+        $address->isdefault = true;
 
-            $address->save();
+        $address->save();
 
         $this->setAmountForCheckout();
 
@@ -174,7 +174,6 @@ class CartController extends Controller
         $order->total = $total;
         $order->name = $address->name;
         $order->phone = $address->phone;
-//        $order->email = Auth::user()->email;
         $order->email = $request->email;
         $order->address = $address->address;
         $order->city = $address->city;
@@ -201,6 +200,7 @@ class CartController extends Controller
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
+            $orderItem->size = $product->size;
             $orderItem->save();
 
             $product->quantity -= $item->qty;
