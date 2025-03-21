@@ -11,7 +11,7 @@
                 <div class="col-lg-9">
                     <div class="page-content my-account__dashboard">
                         <p>Zdravo <strong>{{Auth::user()->name}}</strong></p>
-                        <p>Ovdje možete vidjeti Vaše <a class="unerline-link" href="account_orders.html">nedavne narudžbe</a>, upravljati <a class="unerline-link" href="account_edit_address.html">adresama za isporuku</a>, i <a class="unerline-link" href="account_edit.html">izmjeniti lozinku i detalje naloga.</a></p>
+{{--                        <p>Ovdje možete vidjeti Vaše <a class="unerline-link" href="account_orders.html">nedavne narudžbe</a>, upravljati <a class="unerline-link" href="account_edit_address.html">adresama za isporuku</a>, i <a class="unerline-link" href="account_edit.html">izmjeniti lozinku i detalje naloga.</a></p>--}}
                     </div>
                 </div>
             </div>

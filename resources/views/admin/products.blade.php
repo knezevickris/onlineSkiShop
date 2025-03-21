@@ -42,14 +42,14 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center">Id artikla</th>
+                            <th>ID</th>
                             <th class="text-center">Naziv</th>
                             <th class="text-center">Cijena</th>
                             <th class="text-center">Prodajna cijena</th>
-                            <th class="text-center">Bar-kod</th>
                             <th class="text-center">Kategorija</th>
                             <th class="text-center">Brend</th>
-                            <th class="text-center">Istaknuto</th>
+                            <th class="text-center">Više veličina</th>
+                            <th class="text-center">Pol</th>
                             <th class="text-center">Dostupno</th>
                             <th class="text-center">Količina</th>
                             <th class="text-center">Akcije</th>
@@ -70,11 +70,15 @@
                             </td>
                             <td class="text-left">{{$product->regular_price}} KM</td>
                             <td class="text-center">{{$product->sale_price}} KM</td>
-                            <td class="text-center">{{$product->SKU}}</td>
                             <td class="text-center">{{$product->category->name}}</td>
                             <td class="text-center">{{$product->brand->name}}</td>
-                            <td class="text-center">{{$product->featured == 0? 'No':'Yes'}}</td>
-                            <td class="text-center">{{$product->stock_status}}</td>
+                            <td class="text-center">{{$product->has_sizes == 0? 'Ne':'Da'}}</td>
+                            <td class="text-center">{{$product->gender}}</td>
+                            <td class="text-center">
+                                @if($product->quantity == 0)rasprodato
+                                    @else da
+                                @endif
+                            </td>
                             <td class="text-center">{{$product->quantity}}</td>
                             <td>
                                 <div class="list-icon-function">

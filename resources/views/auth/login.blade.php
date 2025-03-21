@@ -81,6 +81,11 @@
                                 <span class="text-secondary">Još uvijek niste registrovani? </span>
                                 <a href="{{route('register')}}" class="btn-text js-show-register">Kreiraj nalog</a>
                             </div>
+
+                            <div class="customer-option mt-4 text-center">
+                                <span class="text-secondary">Zaboravili ste lozinku?</span>
+                                <a href="{{route('password.request')}}" class="btn-text">Resetuj lozinku</a>
+                            </div>
                         </form>
                     </div>
                 </div>

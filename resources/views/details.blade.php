@@ -83,16 +83,20 @@
                         @if(Cart::instance('cart')->content()->where('id', $product->id)->count()>0)
                             <a href="{{route('cart.index')}}" class="btn btn-warning mb-3">U korpi</a>
                         @else
-                            <div class="form-group">
-                                    <label for="size">Izaberite veličinu:</label><br>
-                                    <select name="size" id="size" class="form-control">
-                                        <option value="S" {{ old('size') == 'S' ? 'selected' : '' }}>S</option>
-                                        <option value="M" {{ old('size') == 'M' ? 'selected' : '' }}>M</option>
-                                        <option value="L" {{ old('size') == 'L' ? 'selected' : '' }}>L</option>
-                                        <option value="XL" {{ old('size') == 'XL' ? 'selected' : '' }}>XL</option>
-                                    </select>
-                                <br>
-                            </div>
+                            @if($product->has_sizes)
+                                <div class="form-group">
+                                        <label for="size">Izaberite veličinu:</label><br>
+                                        <select name="size" id="size" class="form-control">
+                                            <option value="S" {{ old('size') == 'S' ? 'selected' : '' }}>S</option>
+                                            <option value="M" {{ old('size') == 'M' ? 'selected' : '' }}>M</option>
+                                            <option value="L" {{ old('size') == 'L' ? 'selected' : '' }}>L</option>
+                                            <option value="XL" {{ old('size') == 'XL' ? 'selected' : '' }}>XL</option>
+                                        </select>
+                                    <br>
+                                </div><br>
+                            @else
+                                <div style="font-size: 14px; font-weight: bold; color: gray; background-color: lightblue; padding: 5px 12px; border-radius: 4px; display: inline-block;">Veličina: univerzalna</div><br><br>
+                            @endif
                             <form name="addtocart-form" method="post" action="{{route('cart.add')}}">
                                 @csrf
                                 @method('POST')
@@ -101,7 +105,7 @@
                                         <input type="number" name="quantity" value="1" min="1" class="qty-control__number text-center">
                                         <div class="qty-control__reduce">-</div>
                                         <div class="qty-control__increase">+</div>
-                                    </div><!-- .qty-control -->
+                                    </div>
                                     <input type="hidden" name="id" value="{{$product->id}}">
                                     <input type="hidden" name="name" value="{{$product->name}}">
                                     <input type="hidden" name="price" value="{{$product->sale_price == ''? $product->regular_price : $product->sale_price}}">
@@ -112,28 +116,28 @@
                         @endif
                     @endif
                     <div class="product-single__addtolinks">
-                        @if(Cart::instance('wishlist')->content()->where('id', $product -> id)->count() > 0)
-                            <form id="frm-remove" method="POST" action="{{route('wishlist.item.remove', ['rowId'=>Cart::instance('wishlist')->content()->where('id', $product -> id)->first()->rowId])}}">
-                                @csrf
-                                @method('DELETE')
-                                <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart" onclick="document.getElementById('frm-remove').submit();"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <use href="#icon_heart" />
-                                </svg><span> Ukloni iz omiljenih artikala</span></a>
-                            </form>
-                        @else
-                            <form method="POST" action="{{route('wishlist.add')}}" id="wishlist-form">
-                                @csrf
-                                <input type="hidden" name="id" value="{{$product->id}}" />
-                                <input type="hidden" name="name" value="{{$product->name}}" />
-                                <input type="hidden" name="price" value="{{$product->sale_price != $product -> regular_price ? $product->sale_price : $product -> regular_price}}" />
-                                <input type="hidden" name="quantity" value="1" />
-                                <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist" onclick="document.getElementById('wishlist-form').submit()"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        @if(Auth::user())
+                            @if(Auth::user()->favoriteProducts->contains($product->id))
+                                <form id="frm-remove" method="POST" action="{{ route('wishlist.item.remove', ['rowId' => $product->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart" onclick="document.getElementById('frm-remove').submit();"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_heart" />
-                                    </svg><span> Dodaj u omiljene artikle</span></a>
-                            </form>
+                                    </svg><span> Ukloni iz omiljenih artikala</span></a>
+                                </form>
+                            @else
+                                <form method="POST" action="{{route('wishlist.add')}}" id="wishlist-form">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$product->id}}" />
+                                    <input type="hidden" name="name" value="{{$product->name}}" />
+                                    <input type="hidden" name="price" value="{{$product->sale_price != $product -> regular_price ? $product->sale_price : $product -> regular_price}}" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist" onclick="document.getElementById('wishlist-form').submit()"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <use href="#icon_heart" />
+                                        </svg><span> Dodaj u omiljene artikle</span></a>
+                                </form>
+                            @endif
                         @endif
-                        <script src="js/details-disclosure.html" defer="defer"></script>
-                        <script src="js/share.html" defer="defer"></script>
                     </div>
                     <div class="product-single__meta-info">
                         <div class="meta-item">
@@ -165,41 +169,12 @@
                         <a class="nav-link nav-link_underscore active" id="tab-description-tab" data-bs-toggle="tab"
                            href="#tab-description" role="tab" aria-controls="tab-description" aria-selected="true">Opis</a>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link nav-link_underscore" id="tab-additional-info-tab" data-bs-toggle="tab"
-                           href="#tab-additional-info" role="tab" aria-controls="tab-additional-info"
-                           aria-selected="false">Dodatne informacije</a>
-                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-description" role="tabpanel"
                          aria-labelledby="tab-description-tab">
                         <div class="product-single__description">
                             {{$product->description}}
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tab-additional-info" role="tabpanel" aria-labelledby="tab-additional-info-tab">
-                        <div class="product-single__addtional-info">
-                            <div class="item">
-                                <label class="h6">Weight</label>
-                                <span>1.25 kg</span>
-                            </div>
-                            <div class="item">
-                                <label class="h6">Dimensions</label>
-                                <span>90 x 60 x 90 cm</span>
-                            </div>
-                            <div class="item">
-                                <label class="h6">Size</label>
-                                <span>XS, S, M, L, XL</span>
-                            </div>
-                            <div class="item">
-                                <label class="h6">Color</label>
-                                <span>Black, Orange, White</span>
-                            </div>
-                            <div class="item">
-                                <label class="h6">Storage</label>
-                                <span>Relaxed fit shirt-style dress with a rugged</span>
-                            </div>
                         </div>
                     </div>
                 </div>

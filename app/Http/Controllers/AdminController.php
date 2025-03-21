@@ -328,6 +328,8 @@ class AdminController extends Controller
         $product -> quantity = $request->quantity;
         $product -> category_id = $request->category_id;
         $product -> brand_id = $request->brand_id;
+        $product -> gender = $request ->gender;
+        $product -> has_sizes = $request->has_sizes;
 
         $current_timestamp = Carbon::now()->timestamp;
 
@@ -417,6 +419,8 @@ class AdminController extends Controller
         $product -> quantity = $request->quantity;
         $product -> category_id = $request->category_id;
         $product -> brand_id = $request->brand_id;
+        $product -> gender = $request ->gender;
+        $product -> has_sizes = $request->has_sizes;
 
         $current_timestamp = Carbon::now()->timestamp;
 

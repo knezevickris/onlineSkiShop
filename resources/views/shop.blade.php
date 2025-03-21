@@ -306,49 +306,31 @@
                                             @endif
                                         </span>
                                     </div>
-                                    <div class="product-card__review d-flex align-items-center">
-                                        <div class="reviews-group d-flex">
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                            <svg class="review-star" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg">
-                                                <use href="#icon_star" />
-                                            </svg>
-                                        </div>
-                                        <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
-                                    </div>
-                                    @if(Cart::instance('wishlist')->content()->where('id', $product -> id)->count() > 0)
-                                        <form method="POST" action="{{route('wishlist.item.remove', ['rowId'=>Cart::instance('wishlist')->content()->where('id', $product -> id)->first()->rowId])}}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart" title="Omiljeni artikal">
-                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_heart" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form method="POST" action="{{route('wishlist.add')}}">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{$product->id}}" />
-                                            <input type="hidden" name="name" value="{{$product->name}}" />
-                                            <input type="hidden" name="price" value="{{$product->sale_price != $product -> regular_price ? $product->sale_price : $product -> regular_price}}" />
-                                            <input type="hidden" name="quantity" value="1" />
-                                            <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Dodaj u omiljene artikle">
-                                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <use href="#icon_heart" />
-                                                </svg>
-                                            </button>
-                                        </form>
+                                    @if(Auth::user())
+                                        @if(Auth::user() && Auth::user()->favoriteProducts->contains($product->id))
+                                            <form method="POST" action="{{ route('wishlist.item.remove', ['rowId' => $product->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart" title="Omiljeni artikal">
+                                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <use href="#icon_heart" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{route('wishlist.add')}}">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$product->id}}" />
+                                                <input type="hidden" name="name" value="{{$product->name}}" />
+                                                <input type="hidden" name="price" value="{{$product->sale_price != $product -> regular_price ? $product->sale_price : $product -> regular_price}}" />
+                                                <input type="hidden" name="quantity" value="1" />
+                                                <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Dodaj u omiljene artikle">
+                                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <use href="#icon_heart" />
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

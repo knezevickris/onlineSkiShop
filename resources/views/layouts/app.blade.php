@@ -451,10 +451,10 @@
           <a href="{{route('wishlist.index')}}" class="header-tools__item header-tools__cart">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_heart" />
+                @if(Auth::check() && Auth::user()->favoriteProducts->count() > 0)
+                    <span class="cart-amount d-block position-absolute js-cart-items-count">{{ Auth::user()->favoriteProducts->count() }}</span>
+                @endif
             </svg>
-              @if(Cart::instance('wishlist')->content()->count() > 0)
-                  <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
-              @endif
           </a>
           <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart">
             <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -480,7 +480,7 @@
       <div class="container d-md-flex align-items-center">
         <span class="footer-copyright me-auto">©2025 skiXperience</span>
         <div class="footer-settings d-md-flex align-items-center">
-          <a href="{{route('home.privacy')}}">Politika privatnosti</a> &nbsp;|&nbsp; <a href="{{route('home.terms')}}">Terms &amp; Conditions</a>
+          <a href="{{route('home.privacy')}}">Politika privatnosti</a> &nbsp;|&nbsp; <a href="{{route('home.terms')}}">Uslovi korišćenja</a>
         </div>
       </div>
     </div>
@@ -509,8 +509,8 @@
             <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_heart" />
             </svg>
-              @if(Cart::instance('wishlist')->content()->count() > 0)
-                  <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
+              @if(Auth::check() && Auth::user()->favoriteProducts->count() > 0)
+                  <span class="cart-amount d-block position-absolute js-cart-items-count">{{ Auth::user()->favoriteProducts->count() }}</span>
               @endif
           </div>
           <span>Omiljeno</span>

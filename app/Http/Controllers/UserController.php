@@ -44,4 +44,5 @@ class UserController extends Controller
 
         return back()->with('status', "Naružba je uspješno otkazana.");
     }
+
 }

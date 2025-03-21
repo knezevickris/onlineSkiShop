@@ -158,22 +158,23 @@
                             <div class="body-title mb-10">Količina <span class="tf-color-1">*</span>
                             </div>
                             <input class="mb-10" type="text" placeholder="Unesite količinu" name="quantity" tabindex="0" value="{{$product->quantity}}" aria-required="true" required="">
+                            <input type="hidden" name="stock_status" value="{{$product->quantity == 0 ? 'ne' : 'da'}}">
                         </fieldset>
                         @error('quantity') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                     </div>
                     <div class="cols gap22">
                         <fieldset class="name">
-                            <div class="body-title mb-10">Dostupnost</div>
+                            <div class="body-title mb-10">Dostupnost više veličina</div>
                             <div class="select mb-10">
-                                <select class="" name="stock_status">
-                                    <option value="instock"   {{$product->stock_status == "instock" ? "selected" : ""}}>Da</option>
-                                    <option value="outofstock" {{$product->stock_status == "outstock" ? "selected" : ""}}>Ne</option>
+                                <select class="" name="has_sizes">
+                                    <option value="0"   {{$product->has_sizes == "0" ? "selected" : ""}}>Ne</option>
+                                    <option value="1" {{$product->has_sizes == "1" ? "selected" : ""}}>Da</option>
                                 </select>
                             </div>
                         </fieldset>
-                        @error('stock_status') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
+                        @error('has_sizes') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                         <fieldset class="name">
-                            <div class="body-title mb-10">Istaknutno</div>
+                            <div class="body-title mb-10">Istaknuto </div>
                             <div class="select mb-10">
                                 <select class="" name="featured">
                                     <option value="0"  {{$product->featured == "0" ? "selected" : ""}}>Ne</option>
@@ -182,6 +183,17 @@
                             </div>
                         </fieldset>
                         @error('featured') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
+                        <fieldset class="gender">
+                            <div class="body-title mb-10">Namijenjeno polu</div>
+                            <div class="select mb-10">
+                                <select class="" name="gender">
+                                    <option value="F"  {{$product->gender == "F" ? "selected" : ""}}>Ženski</option>
+                                    <option value="M"  {{$product->gender == "M" ? "selected" : ""}}>Muški</option>
+                                    <option value="U"  {{$product->gender == "U" ? "selected" : ""}}>Unisex</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        @error('gender') <span class="alert alert-danger text-center">{{$message}}</span> @enderror
                     </div>
                     <div class="cols gap10">
                         <button class="tf-button w-full" type="submit">Sačuvaj artikal</button>
