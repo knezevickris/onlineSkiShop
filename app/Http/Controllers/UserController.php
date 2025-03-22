@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Carbon\Carbon;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -43,6 +46,35 @@ class UserController extends Controller
         $transaction->save();
 
         return back()->with('status', "Naružba je uspješno otkazana.");
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('user.change-password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required'],
+            'new_password' => ['required', 'min:8', 'confirmed'],
+        ]);
+
+        if (!Hash::check($request->current_password, Auth::user()->password)) {
+            return back()->withErrors(['current_password' => 'Trenutna lozinka nije tačna']);
+        }
+
+        Auth::user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'Lozinka uspješno promijenjena.');
+    }
+
+    public function addresses(){
+        $user = Auth::user();
+        $addresses = $user->addresses;
+        return view('user/addresses', compact('addresses'));
     }
 
 }

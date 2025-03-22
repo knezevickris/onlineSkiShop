@@ -80,7 +80,7 @@ class CartController extends Controller
 
     public function calculateDiscount(){
         $discount = 0;
-        $subtotal = str_replace(',', '', Cart::instance('cart')->subtotal());
+        $total = str_replace(',', '', Cart::instance('cart')->subtotal());
 
         if(Session::has('coupon')){
             if(Session::get('coupon')['type'] == 'fixed'){
@@ -88,18 +88,19 @@ class CartController extends Controller
             }
             else{
                 $couponValue = floatval(Session::get('coupon')['value']);
-                $discount = $subtotal * $couponValue /100;
+                $discount = $total * $couponValue /100;
             }
         }
 
-        $subtotalAfterDiscount = $subtotal- $discount;
-        $taxAfterDiscount = ($subtotalAfterDiscount * config('cart.tax'))/100;
-        $totalAfterDiscount = $subtotalAfterDiscount + $taxAfterDiscount;
+        $totalAfterDiscount = $total- $discount;
+        $taxAfterDiscount = $totalAfterDiscount*0.1452;
+        $subtotalAfterDiscount = $totalAfterDiscount*0.8548;
+
 
         Session::put('discounts', [
            'discount' => number_format(floatval($discount), 2, '.', ''),
-           'subtotal' => number_format(floatval($subtotalAfterDiscount), 2, '.', ''),
-           'tax' => number_format(floatval($taxAfterDiscount), 2, '.', ''),
+           'subtotal' => number_format($subtotalAfterDiscount, 2, '.', ''),
+           'tax' => number_format($taxAfterDiscount, 2, '.', ''),
            'total' => number_format(floatval($totalAfterDiscount), 2, '.', '')
         ]);
     }
@@ -116,8 +117,6 @@ class CartController extends Controller
         }
 
         return  view('checkout');
-//        $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
-//        return view('checkout', compact('address'));
     }
 
 
@@ -141,8 +140,6 @@ class CartController extends Controller
         }
 
         $userId = Auth::user()->id;
-//        $address = Address::where('user_id', $userId)->where('isdefault', true)->first();
-
         $address = new Address();
 
         $address->name = $request->name;
@@ -205,11 +202,7 @@ class CartController extends Controller
 
             $product->quantity -= $item->qty;
             $product->save();
-            Log::info('Product: '.$product->quantity);
-            Log::info('OrderItem: '.$orderItem->quantity);
-
         }
-        Log::info('Order: '.$order->id);
 
         if($request->mode == 'cod') {
                 $transaction = new Transaction();
@@ -231,6 +224,11 @@ class CartController extends Controller
     }
 
     public function setAmountForCheckout(){
+        $total = Cart::instance('cart')->subtotal();
+        $pdv = $total * 0.1452;
+        $subtotal = $total * 0.8548;
+
+
         if(!Cart::instance('cart')->content()->count() > 0){
             Session::forget('checkout');
             return;
@@ -248,9 +246,9 @@ class CartController extends Controller
         else{
             Session::put('checkout', [
                 'discount' => 0,
-                'subtotal' => Cart::instance('cart')->subtotal(),
-                'tax' => Cart::instance('cart')->tax(),
-                'total' => Cart::instance('cart')->total()
+                'subtotal'=> $subtotal,
+                'tax' => $pdv,
+                'total' => $total
             ]);
         }
     }

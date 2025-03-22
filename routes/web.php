@@ -52,6 +52,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/account-orders', [UserController::class, 'orders'])->name('user.orders');
     Route::get('/account-order/{order_id}/details',[UserController::class, 'order_details'])->name('user.order.details');
     Route::put('/account-order/cancel-order', [UserController::class, 'cancel_order'])->name('user.order.cancel');
+
+    Route::get('/account/password', [UserController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/account/password-updated', [UserController::class, 'updatePassword'])->name('password.update');
+
+    Route::get('/account/addresses', [UserController::class, 'addresses'])->name('user.addresses');
 });
 
 Route::middleware(['auth',AuthAdmin::class])->group(function(){

@@ -154,28 +154,28 @@
                                     <table class="checkout-totals">
                                         <tbody>
                                             <tr>
-                                                <th>Cijena</th>
-                                                <td align="right"> {{Cart::instance('cart')->subtotal()}} KM</td>
+                                                <th>Iznos bez popusta</th>
+                                                <td class="text-right"> {{Cart::instance('cart')->subtotal()}} KM</td>
                                             </tr>
                                             <tr>
                                                 <th>Popust {{Session::get('coupon')['code']}}</th>
-                                                <td align="right">{{Session::get('discounts')['discount']}} KM</td>
+                                                <td class="text-right">{{Session::get('discounts')['discount']}} KM</td>
                                             </tr>
                                             <tr>
-                                                <th>Cijena nakon popusta</th>
-                                                <td align="right">{{Session::get('discounts')['subtotal']}} KM</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Dostava</th>
-                                                <td align="right">0.00 KM</td>
+                                                <th>Iznos bez PDV-a</th>
+                                                <td class="text-right">{{Session::get('discounts')['subtotal']}} KM</td>
                                             </tr>
                                             <tr>
                                                 <th>PDV</th>
-                                                <td align="right">{{Session::get('discounts')['tax']}} KM</td>
+                                                <td class="text-right">{{Session::get('discounts')['tax']}} KM</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Dostava</th>
+                                                <td class="text-right">0.00 KM</td>
                                             </tr>
                                             <tr>
                                                 <th>Ukupno</th>
-                                                <td align="right">{{Session::get('discounts')['total']}} KM</td>
+                                                <td class="text-right">{{Session::get('discounts')['total']}} KM</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -183,20 +183,20 @@
                                     <table class="checkout-totals">
                                         <tbody>
                                         <tr>
-                                            <th>Cijena</th>
-                                            <td align="right">{{Cart::instance('cart')->subtotal()}} KM</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Dostava</th>
-                                            <td align="right">0.00 KM</td>
+                                            <th>Iznos bez PDV-a</th>
+                                            <td class="text-right">{{ (float)Cart::instance('cart')->subtotal(2, '.', '') * (0.8548) }} KM</td>
                                         </tr>
                                         <tr>
                                             <th>PDV</th>
-                                            <td align="right">{{Cart::instance('cart')->tax()}} KM</td>
+                                            <td class="text-right">{{ (float)Cart::instance('cart')->subtotal(2, '.', '') * 0.1452 }} KM</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Dostava</th>
+                                            <td class="text-right">0.00 KM</td>
                                         </tr>
                                         <tr>
                                             <th>Ukupno</th>
-                                            <td align="right">{{Cart::instance('cart')->total()}} KM</td>
+                                            <td class="text-right">{{Cart::instance('cart')->subtotal()}} KM</td>
                                         </tr>
                                         </tbody>
                                     </table>

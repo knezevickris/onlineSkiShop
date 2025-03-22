@@ -91,8 +91,8 @@
                 </div>
               </div>
             @endforeach
-        </div><!-- /.swiper-wrapper -->
-      </div><!-- /.swiper-container js-swiper-slider -->
+        </div>
+      </div>
 
       <div
         class="products-carousel__prev products-carousel__prev-1 position-absolute top-50 d-flex align-items-center justify-content-center">
@@ -105,8 +105,8 @@
         <svg width="25" height="25" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
           <use href="#icon_next_md" />
         </svg>
-      </div><!-- /.products-carousel__next -->
-    </div><!-- /.position-relative -->
+      </div>
+    </div>
   </section>
 
   <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
@@ -179,9 +179,9 @@
                         </div>
                     </div>
                 @endforeach
-            </div><!-- /.swiper-wrapper -->
-          </div><!-- /.swiper-container js-swiper-slider -->
-        </div><!-- /.position-relative -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -248,7 +248,7 @@
                 </div>
             </div>
         @endforeach
-    </div><!-- /.row -->
+    </div>
 
     <div class="text-center mt-2">
       <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium" href="{{route('shop.index')}}">Prikaži još</a>
