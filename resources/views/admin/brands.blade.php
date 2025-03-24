@@ -22,19 +22,7 @@
 
                 <div class="wg-box">
                     <div class="flex items-center justify-between gap10 flex-wrap">
-                        <div class="wg-filter flex-grow">
-                            <form class="form-search">
-                                <fieldset class="name">
-                                    <input type="text" placeholder="Pretraži..." class="" name="name"
-                                           tabindex="2" value="" aria-required="true" required="">
-                                </fieldset>
-                                <div class="button-submit">
-                                    <button class="" type="submit"><i class="icon-search"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        <a class="tf-button style-1 w208" href="{{route('admin.brand.add')}}"><i
-                                class="icon-plus"></i>Dodaj novi</a>
+                        <a class="tf-button style-1 w208" href="{{route('admin.brand.add')}}"><i class="icon-plus"></i>Dodaj novi</a>
                     </div>
                     <div class="wg-table table-all-user">
                         <div class="table-responsive">
@@ -44,7 +32,6 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
-{{--                                    <th>Redni br.</th>--}}
                                     <th>Naziv</th>
                                     <th>Slug</th>
                                     <th>Proizvodi</th>
@@ -54,13 +41,12 @@
                                 <tbody>
                                 @foreach( $brands as $brand )
                                 <tr>
-{{--                                    <td>{{$brand -> id}}</td>--}}
                                     <td class="pname">
                                         <div class="image">
                                             <img src="{{asset('uploads/brands')}}/{{$brand->image}}" alt="{{$brand->name}}" class="image">
                                         </div>
                                         <div class="name">
-                                            <a href="#" class="body-title-2">{{$brand->name}}</a>
+                                            <p class="body-title-2" style="padding-top: 20%;">{{$brand->name}}</p>
                                         </div>
                                     </td>
                                     <td>{{$brand->slug}}</td>

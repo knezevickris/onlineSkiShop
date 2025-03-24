@@ -24,14 +24,12 @@
                                 Kategorije artikala
                                 <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                                     <g aria-hidden="true" stroke="none" fill-rule="evenodd">
-                                        <path
-                                            d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
+                                        <path d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
                                     </g>
                                 </svg>
                             </button>
                         </h5>
-                        <div id="accordion-filter-1" class="accordion-collapse collapse show border-0"
-                             aria-labelledby="accordion-heading-1" data-bs-parent="#categories-list" >
+                        <div id="accordion-filter-1" class="accordion-collapse collapse show border-0" aria-labelledby="accordion-heading-1" data-bs-parent="#categories-list" >
                             <div class="accordion-body px-0 pb-0 pt-3 category-list">
                                 <ul class="list list-inline mb-0">
                                     @foreach($categories as $category)
@@ -57,8 +55,7 @@
                                 Brendovi
                                 <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                                     <g aria-hidden="true" stroke="none" fill-rule="evenodd">
-                                        <path
-                                            d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
+                                        <path d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
                                     </g>
                                 </svg>
                             </button>
@@ -84,6 +81,49 @@
                     </div>
                 </div>
 
+                <div class="accordion" id="gender-filters">
+                    <div class="accordion-item mb-4 pb-3" style="background-color: #FFFFFF; border: none" >
+                        <h5 class="accordion-header" id="accordion-heading-brand">
+                            <button class="accordion-button p-0 border-0 fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#accordion-filter-brand" aria-expanded="true" aria-controls="accordion-filter-brand" style="background-color: #FFFFFF;">
+                                Pol
+                                <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
+                                    <g aria-hidden="true" stroke="none" fill-rule="evenodd">
+                                        <path d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
+                                    </g>
+                                </svg>
+                            </button>
+                        </h5>
+                        <div id="accordion-filter-brand" class="accordion-collapse collapse show border-0" aria-labelledby="accordion-heading-brand" data-bs-parent="#brand-filters">
+                            <div class="search-field multi-select accordion-body px-0 pb-0">
+                                <ul class="list list-inline mb-0 brand-list">
+                                        <li class="list-item">
+                                            <span class="menu-link py-1">
+                                                <input type="checkbox" name="genders" value="F" class="chk-brand"
+                                                       @if(in_array('F', $f_genders)) checked="checked" @endif> Ženski
+                                            </span>
+                                            <span class="text-right float-end">{{ $genderCounts['F'] ?? 0 }}</span>
+                                        </li>
+                                        <li class="list-item">
+                                                <span class="menu-link py-1">
+                                                    <input type="checkbox" name="genders" value="M" class="chk-brand"
+                                                           @if(in_array('M', $f_genders)) checked="checked" @endif> Muški
+                                                </span>
+                                            <span class="text-right float-end">{{ $genderCounts['M'] ?? 0 }}</span>
+                                        </li>
+                                        <li class="list-item">
+                                                <span class="menu-link py-1">
+                                                    <input type="checkbox" name="genders" value="U" class="chk-brand"
+                                                           @if(in_array('U', $f_genders)) checked="checked" @endif> Unisex
+                                                </span>
+                                            <span class="text-right float-end">{{ $genderCounts['U'] ?? 0 }}</span>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="accordion" id="price-filters">
                     <div class="accordion-item mb-4" style="background-color: #FFFFFF; border: none">
@@ -93,8 +133,7 @@
                                 Cijene
                                 <svg class="accordion-button__icon type2" viewBox="0 0 10 6" xmlns="http://www.w3.org/2000/svg">
                                     <g aria-hidden="true" stroke="none" fill-rule="evenodd">
-                                        <path
-                                            d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
+                                        <path d="M5.35668 0.159286C5.16235 -0.053094 4.83769 -0.0530941 4.64287 0.159286L0.147611 5.05963C-0.0492049 5.27473 -0.049205 5.62357 0.147611 5.83813C0.344427 6.05323 0.664108 6.05323 0.860924 5.83813L5 1.32706L9.13858 5.83867C9.33589 6.05378 9.65507 6.05378 9.85239 5.83867C10.0492 5.62357 10.0492 5.27473 9.85239 5.06018L5.35668 0.159286Z" />
                                     </g>
                                 </svg>
                             </button>
@@ -102,7 +141,7 @@
                         <div id="accordion-filter-price" class="accordion-collapse collapse show border-0"
                              aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
                             <input class="price-range-slider" type="text" name="price_range" value="" data-slider-min="1"
-                                   data-slider-max="9999" data-slider-step="200" data-slider-value="[{{$minPrice}}, {{$maxPrice}}]" data-currency="BAM" />
+                                   data-slider-max="5000" data-slider-step="200" data-slider-value="[{{$minPrice}}, {{$maxPrice}}]" data-currency="BAM" />
                             <div class="price-range__info d-flex align-items-center mt-2">
                                 <div class="me-auto">
                                     <span class="text-secondary">Najniža: </span>
@@ -110,12 +149,16 @@
                                 </div>
                                 <div>
                                     <span class="text-secondary">Najviša: </span>
-                                    <span class="price-range__max">9999 KM</span>
+                                    <span class="price-range__max">5000 KM</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="text-center mt-3">
+                    <a href="{{ route('shop.index') }}" class="btn btn-secondary">Resetuj filtere</a>
+                </div>
+
             </div>
 
             <div class="shop-list flex-grow-1">
@@ -351,6 +394,8 @@
         <input type="hidden" name="order" id="order" value="{{$order}}">
         <input type="hidden" name="brands" id="hdnBrands" >
         <input type="hidden" name="categories" id="hdnCategories">
+{{--        <input type="hidden" name="genders" id="hdnGenders">--}}
+        <input type="hidden" id="hdnGenders" name="genders" value="{{ implode(',', $f_genders) }}">
         <input type="hidden" name="min" id="hdnMinPrice" value="{{$minPrice}}">
         <input type="hidden" name="max" id="hdnMaxPrice" value="{{$maxPrice}}">
     </form>
@@ -397,6 +442,20 @@
                 $("#hdnCategories").val(categories);
                 $("#frmfilter").submit();
             });
+
+            $("input[name='genders']").on("change", function () {
+                var genders = "";
+                $("input[name='genders']:checked").each(function () {
+                    if (genders == "") {
+                        genders += $(this).val();
+                    } else {
+                        genders += ',' + $(this).val();
+                    }
+                });
+                $("#hdnGenders").val(genders);
+                $("#frmfilter").submit();
+            });
+
 
             $("[name='price_range']").on("change", function(){
                 var min = $(this).val().split(',')[0];

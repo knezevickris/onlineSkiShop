@@ -14,9 +14,9 @@ class HomeController extends Controller
     public function index()
     {
         $slides = Slide::where('status', 1)->get()->take(3);
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('created_at')->get();
         $sProducts = Product::whereColumn('sale_price', '<>', 'regular_price')->inRandomOrder()->get()->take(8);
-        $fProducts = Product::where('featured', 1)->get()->take(8);
+        $fProducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8);
         return view('index', compact('slides', 'categories', 'sProducts', 'fProducts'));
     }
 

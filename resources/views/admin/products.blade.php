@@ -21,19 +21,7 @@
 
             <div class="wg-box">
                 <div class="flex items-center justify-between gap10 flex-wrap">
-                    <div class="wg-filter flex-grow">
-                        <form class="form-search">
-                            <fieldset class="name">
-                                <input type="text" placeholder="Pretraži..." class="" name="name"
-                                       tabindex="2" value="" aria-required="true" required="">
-                            </fieldset>
-                            <div class="button-submit">
-                                <button class="" type="submit"><i class="icon-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                    <a class="tf-button style-1 w208" href="{{route('admin.product.add')}}"><i
-                            class="icon-plus"></i>Dodaj novi</a>
+                    <a class="tf-button style-1 w208" href="{{route('admin.product.add')}}"><i class="icon-plus"></i>Dodaj novi</a>
                 </div>
                 <div class="table-responsive">
                     @if(Session::has('status'))
@@ -68,7 +56,7 @@
                                     <div class="text-tiny mt-3">{{$product->slug}}</div>
                                 </div>
                             </td>
-                            <td class="text-left">{{$product->regular_price}} KM</td>
+                            <td class="text-center">{{$product->regular_price}} KM</td>
                             <td class="text-center">{{$product->sale_price}} KM</td>
                             <td class="text-center">{{$product->category->name}}</td>
                             <td class="text-center">{{$product->brand->name}}</td>
