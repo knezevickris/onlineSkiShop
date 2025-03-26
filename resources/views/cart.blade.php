@@ -173,11 +173,12 @@
                                     <tbody>
                                     <tr>
                                         <th>Iznos bez PDV-a</th>
-                                        <td class="text-right">{{ (float)Cart::instance('cart')->subtotal(2, '.', '') * (0.8548) }} KM</td>
+{{--                                        <td class="text-right">{{ (float)Cart::instance('cart')->subtotal(2, '.', '') * (0.8548) }} KM</td>--}}
+                                        <td class="text-right">{{ number_format((float)Cart::instance('cart')->subtotal(2, '.', '') * 0.8548, 2, '.', '') }} KM</td>
                                     </tr>
                                     <tr>
                                         <th>PDV</th>
-                                        <td class="text-right">{{ (float)Cart::instance('cart')->subtotal(2, '.', '') * 0.1452 }} KM</td>
+                                        <td class="text-right">{{ number_format((float)Cart::instance('cart')->subtotal(2, '.', '') * 0.1452, 2, '.','') }} KM</td>
                                     </tr>
                                     <tr>
                                         <th>Dostava</th>

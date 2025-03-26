@@ -128,7 +128,7 @@
                             <div class="mb-2">
                                 <div class="block-legend">
                                     <div class="dot t1"></div>
-                                    <div class="text-tiny">Ukupan prihod</div>
+                                    <div class="text-tiny">Iznos svih narudžbi</div>
                                 </div>
                             </div>
                             <div class="flex items-center gap10">

@@ -80,7 +80,7 @@
                             <li class="menu-item">
                                 <a href="{{route('admin.index')}}" class="">
                                     <div class="icon"><i class="icon-grid"></i></div>
-                                    <div class="text">Dashboard</div>
+                                    <div class="text">Statistika</div>
                                 </a>
                             </li>
                         </ul>

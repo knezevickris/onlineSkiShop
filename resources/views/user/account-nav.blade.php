@@ -1,5 +1,5 @@
 <ul class="account-nav">
-    <li><a href="{{route('user.index')}}" class="menu-link menu-link_us-s">Dashboard</a></li>
+    <li><a href="{{route('user.index')}}" class="menu-link menu-link_us-s">Profil</a></li>
     <li><a href="{{route('user.orders')}}" class="menu-link menu-link_us-s">Narudžbe</a></li>
     <li><a href="{{route('wishlist.index')}}" class="menu-link menu-link_us-s">Omiljeni artikli</a></li>
     <li><a href="{{route('user.addresses')}}" class="menu-link menu-link_us-s">Adrese</a></li>

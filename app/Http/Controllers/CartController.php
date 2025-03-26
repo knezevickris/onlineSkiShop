@@ -58,9 +58,12 @@ class CartController extends Controller
 
     public function apply_coupon(Request $request){
         $coupon_code = $request->coupon_code;
+        $cartSubtotal = round((float) str_replace(',', '', Cart::instance('cart')->subtotal()), 2);
         if(isset($coupon_code)){
-           $coupon = Coupon::where('code', $coupon_code)->where('expiry_date', '>=', Carbon::today())->where('cart_value', '>=',(float)Cart::instance('cart')->subtotal())->first();
-
+            $coupon = Coupon::where('code', $coupon_code)
+                ->where('expiry_date', '>=', Carbon::today())
+                ->where('cart_value', '<=', $cartSubtotal)
+                ->first();
             if(!$coupon)
                 return redirect()->back()->with('error', 'Uneseni kupon ne postoji u bazi podataka.');
             else

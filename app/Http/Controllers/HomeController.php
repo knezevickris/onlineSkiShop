@@ -66,11 +66,13 @@ class HomeController extends Controller
         $f_categories = Category::all();
         $brands = Brand::all();
         $f_brands = Brand::all();
-//        $products = Product::where('gender', $gender)->paginate(12);
         $minPrice = "0";
         $maxPrice = "9999";
         $size = "12";
         $order = "-1";
+
+        $f_genders = ['A', 'B', 'C'];
+
         if ($gender == 'F') {
             $products = Product::whereIn('gender', ['F', 'U'])->paginate(10);
         } elseif ($gender == 'M') {
@@ -78,6 +80,6 @@ class HomeController extends Controller
         } else {
             $products = Product::paginate(10);
         }
-        return view('shop', compact('products', 'categories', 'f_categories', 'brands', 'f_brands', 'minPrice', 'maxPrice', 'size', 'order'));
+        return view('shop', compact('products', 'categories', 'f_categories', 'brands', 'f_brands', 'minPrice', 'maxPrice', 'size', 'order', 'f_genders'));
     }
 }

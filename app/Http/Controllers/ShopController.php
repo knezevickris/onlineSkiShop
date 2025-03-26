@@ -72,6 +72,7 @@ class ShopController extends Controller
         return view('shop', compact('products', 'size', 'order', 'brands', 'f_brands', 'categories', 'f_categories', 'minPrice', 'maxPrice', 'genderCounts', 'f_genders'));
     }
 
+
     public function product_details($product_slug){
         $product = Product::where('slug', $product_slug)->first();
         $rProducts = Product::where('slug','<>',$product_slug)->inRandomOrder()->get()->take(8);
