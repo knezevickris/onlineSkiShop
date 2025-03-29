@@ -1,5 +1,16 @@
 @extends('layouts.app')
 @section('content')
+    <style>
+        .table> :not(caption)>tr>th {
+            padding: 0.625rem 1.5rem .625rem !important;
+            background-color: lightblue !important;
+        }
+        .table-bordered> :not(caption)>tr>th,
+        .table-bordered> :not(caption)>tr>td {
+            border-width: 1px 1px;
+            border-color: #6a6e51;
+        }
+    </style>
     <main class="pt-90">
         <div class="mb-4 pb-4"></div>
             <section class="my-account container">
@@ -19,14 +30,14 @@
                         @else
                             <div class="wg-table table-all-user">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered" style="border: 0.5px solid gray; border-radius: 0.5px;"">
+                                    <table class="table table-striped table-bordered" style="border: 0.5px solid gray; border-radius: 0.5px;">
                                         <thead style="background-color: #6a6e51; font-weight: 500; ">
                                             <tr>
-                                                <td class="text-center">Ulica i broj</td>
-                                                <td class="text-center">Grad</td>
-                                                <td class="text-center">Država</td>
-                                                <td class="text-center">Poštanski broj</td>
-                                                <td class="text-center">Datum kreiranja</td>
+                                                <th class="text-center">Ulica i broj</th>
+                                                <th class="text-center">Grad</th>
+                                                <th class="text-center">Država</th>
+                                                <th class="text-center">Poštanski broj</th>
+                                                <th class="text-center">Datum kreiranja</th>
                                             </tr>
                                         </thead>
                                         <tbody>

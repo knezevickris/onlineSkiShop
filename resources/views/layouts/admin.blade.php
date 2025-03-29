@@ -165,20 +165,6 @@
                                     <div class="text">Poruke</div>
                                 </a>
                             </li>
-
-{{--                            <li class="menu-item">--}}
-{{--                                <a href="users.html" class="">--}}
-{{--                                    <div class="icon"><i class="icon-user"></i></div>--}}
-{{--                                    <div class="text">Korisnik</div>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li class="menu-item">--}}
-{{--                                <a href="settings.html" class="">--}}
-{{--                                    <div class="icon"><i class="icon-settings"></i></div>--}}
-{{--                                    <div class="text">Podešavanja</div>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
                             <li class="menu-item">
                                 <form method="POST" action="{{route('logout')}}" id="logout-form">
                                     @csrf

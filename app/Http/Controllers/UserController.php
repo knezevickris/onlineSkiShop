@@ -18,7 +18,6 @@ class UserController extends Controller
         return view('user.index');
     }
 
-    //prikaz istorije narudzbi na korisnickom dashboardu
     public function orders(){
         $orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(10);
         return view('user.orders', compact('orders'));
@@ -71,9 +70,14 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'Lozinka uspješno promijenjena.');
     }
 
-    public function addresses(){
+    public function addresses()
+    {
         $user = Auth::user();
-        $addresses = $user->addresses;
+        $addresses = $user->addresses()
+            ->selectRaw('MIN(id) as id, address, city, country, zip, MAX(created_at) as created_at')
+            ->groupBy('address', 'city', 'country', 'zip')
+            ->get();
+
         return view('user/addresses', compact('addresses'));
     }
 

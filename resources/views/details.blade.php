@@ -109,7 +109,7 @@
                                     <input type="hidden" name="id" value="{{$product->id}}">
                                     <input type="hidden" name="name" value="{{$product->name}}">
                                     <input type="hidden" name="price" value="{{$product->sale_price == ''? $product->regular_price : $product->sale_price}}">
-                                    <input type="hidden" name="size" id="selected-size" value="">
+                                    <input type="hidden" name="size" id="selected-size">
                                     <button type="submit" class="btn btn-primary btn-addtocart" data-aside="cartDrawer">Dodaj u korpu</button>
                                 </div>
                             </form>

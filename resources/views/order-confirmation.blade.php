@@ -64,7 +64,7 @@
                             <thead>
                             <tr>
                                 <th>Artikli</th>
-                                <th>SUBTOTAL</th>
+                                <th>Iznos bez PDV-a</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -83,7 +83,7 @@
                         <table class="checkout-totals">
                             <tbody>
                                 <tr>
-                                    <th>SUBTOTAL</th>
+                                    <th>Iznos bez PDV</th>
                                     <td class="text-right">{{$order->subtotal}} KM</td>
                                 </tr>
                                 <tr>

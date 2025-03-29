@@ -200,7 +200,7 @@ class CartController extends Controller
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
-            $orderItem->size = $product->size;
+            $orderItem->size = $request->selected_size;
             $orderItem->save();
 
             $product->quantity -= $item->qty;

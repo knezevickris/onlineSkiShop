@@ -234,7 +234,7 @@
                         <table class="table table-striped table-bordered table-transaction">
                             <tbody>
                             <tr>
-                                <th>Subtotal</th>
+                                <th>Iznos bez PDV-a</th>
                                 <td>{{$order -> subtotal}} KM</td>
                                 <th>PDV</th>
                                 <td>{{$order -> tax}} KM</td>

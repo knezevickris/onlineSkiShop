@@ -61,10 +61,6 @@
                             <td>
                                 <div class="shopping-cart__product-item__detail">
                                     <h4>{{$item->name}}</h4>
-                                    <ul class="shopping-cart__product-item__options">
-                                        <!--<li>Color: Yellow</li>
-                                        <li>Size: L</li>-->
-                                    </ul>
                                 </div>
                             </td>
                             <td>
@@ -173,7 +169,6 @@
                                     <tbody>
                                     <tr>
                                         <th>Iznos bez PDV-a</th>
-{{--                                        <td class="text-right">{{ (float)Cart::instance('cart')->subtotal(2, '.', '') * (0.8548) }} KM</td>--}}
                                         <td class="text-right">{{ number_format((float)Cart::instance('cart')->subtotal(2, '.', '') * 0.8548, 2, '.', '') }} KM</td>
                                     </tr>
                                     <tr>

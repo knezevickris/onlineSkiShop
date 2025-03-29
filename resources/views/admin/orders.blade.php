@@ -40,10 +40,9 @@
                                 <th class="text-center">Id narudžbe</th>
                                 <th class="text-center">Ime naručioca</th>
                                 <th class="text-center">Broj telefona</th>
-                                <th class="text-center">Subtotal [KM]</th>
+                                <th class="text-center">Iznos bez PDV-a [KM]</th>
                                 <th class="text-center">PDV [KM]</th>
                                 <th class="text-center">Ukupna cijena [KM]</th>
-
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Datum kreiranja</th>
                                 <th class="text-center">Broj artikala</th>

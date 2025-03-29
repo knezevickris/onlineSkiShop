@@ -48,7 +48,6 @@
                             <th>Datum kreiranja</th>
                             <td>{{$order->created_at}}</td>
                             <th>Datum isporuke</th>
-{{--                            <td>{{$order->delivered_at}}</td>--}}
                             <td>
                                 @if(empty($order->delivered_date) && $order->status=='canceled')
                                     <span class="text-dark-red">Isporuka otkazana.</span>
@@ -93,9 +92,6 @@
                             <th class="text-center">Bar kod</th>
                             <th class="text-center">Kategorija</th>
                             <th class="text-center">Brend</th>
-                            <th class="text-center">Opcije</th>
-                            <th class="text-center">Povrat</th>
-{{--                            <th class="text-center">Akcije</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -115,15 +111,6 @@
                                     <td class="text-center">{{$orderItem -> product -> SKU}}</td>
                                     <td class="text-center">{{$orderItem -> product -> category -> name}}</td>
                                     <td class="text-center">{{$orderItem -> product -> brand -> name}}</td>
-                                    <td class="text-center">{{$orderItem -> options}}</td>
-                                    <td class="text-center">{{$orderItem -> rstatus == 0 ? 'Ne' : 'Da'}}</td>
-{{--                                    <td class="text-center">--}}
-{{--                                        <div class="list-icon-function view-icon">--}}
-{{--                                            <div class="item eye">--}}
-{{--                                                <i class="icon-eye"></i>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -141,7 +128,7 @@
                 <div class="my-account__address-item col-md-6">
                     <div class="my-account__address-item__detail">
                         <p>{{$order->name}}</p>
-                        <p>{{$order -> adress}}</p>
+                        <p>{{$order -> address}}</p>
                         <p>{{$order -> city}} </p>
                         <p>{{$order -> country}}</p>
                         <p>{{$order -> zip}}</p>
@@ -157,7 +144,7 @@
                 <table class="table table-striped table-bordered table-transaction">
                     <tbody>
                         <tr>
-                            <th>Subtotal</th>
+                            <th>Iznos bez PDV</th>
                             <td>{{$order -> subtotal}} KM</td>
                             <th>PDV</th>
                             <td>{{$order -> tax}} KM</td>
@@ -168,7 +155,6 @@
                             <th>Ukupno</th>
                             <td>{{$order->total}} KM</td>
                             <th>Način plaćanja</th>
-{{--                            <td>{{$transaction->mode}}</td>--}}
                             <td>Gotovina</td>
                             <th>Status</th>
                             <td>

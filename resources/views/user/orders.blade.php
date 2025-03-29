@@ -3,7 +3,7 @@
     <style>
         .table> :not(caption)>tr>th {
             padding: 0.625rem 1.5rem .625rem !important;
-            background-color: #6a6e51 !important;
+            background-color: lightblue !important;
         }
 
         .table>tr>td {

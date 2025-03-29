@@ -47,25 +47,6 @@
                             <div class="col-6">
                             </div>
                         </div>
-{{--                        @if($address)--}}
-{{--                            <div class="row">--}}
-{{--                               <div class="col-md-12">--}}
-{{--                                   <div class="my-account__address-list">--}}
-{{--                                       <div class="my-account__address-list-item">--}}
-{{--                                           <div class="my-account__address-item_details">--}}
-{{--                                                <p>{{$address->name}}</p>--}}
-{{--                                                <p>{{$address->address}}</p>--}}
-{{--                                                <p>{{$address->city}}, {{$address->country}}</p>--}}
-{{--                                                <p>{{$address->zip}}</p>--}}
-{{--                                           <br/>--}}
-{{--                                               <p>{{$address->phone}}</p>--}}
-{{--                                               <p>{{$address->email}}</p>--}}
-{{--                                           </div>--}}
-{{--                                        </div>--}}
-{{--                                   </div>--}}
-{{--                               </div>--}}
-{{--                            </div>--}}
-{{--                        @else--}}
                             <div class="row mt-5">
                                 <div class="col-md-6">
                                     <div class="form-floating my-3">
@@ -118,13 +99,12 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating my-3">
-                                        <input type="text" class="form-control" name="customer_note" required="">
+                                        <input type="text" class="form-control" name="customer_note" value="{{old('customer_note')}}" required="">
                                         <label style="color: black" for="coustomer_note">Detalji </label>
                                         <span class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
-{{--                        @endif--}}
                     </div>
                     <div class="checkout__totals-wrapper">
                         <div class="sticky-content">
