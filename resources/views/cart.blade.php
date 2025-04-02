@@ -46,7 +46,6 @@
                             <th></th>
                             <th>Cijena</th>
                             <th>Količina</th>
-                            <th>Subtotal</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -80,9 +79,6 @@
                                         <div class="qty-control__increase">+</div>
                                     </form>
                                 </div>
-                            </td>
-                            <td>
-                                <span class="shopping-cart__subtotal">{{$item->subtotal}} KM</span>
                             </td>
                             <td>
                                 <form method="post" action="{{route('cart.item.remove', ['rowId'=>$item->rowId])}}">

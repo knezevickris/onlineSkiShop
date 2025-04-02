@@ -178,8 +178,8 @@
                                     <th class="text-center">Bar kod</th>
                                     <th class="text-center">Kategorija</th>
                                     <th class="text-center">Brend</th>
-                                    <th class="text-center">Opcije</th>
-                                    <th class="text-center">Povrat</th>
+{{--                                    <th class="text-center">Opcije</th>--}}
+{{--                                    <th class="text-center">Povrat</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -199,8 +199,8 @@
                                         <td class="text-center">{{$orderItem -> product -> SKU}}</td>
                                         <td class="text-center">{{$orderItem -> product -> category -> name}}</td>
                                         <td class="text-center">{{$orderItem -> product -> brand -> name}}</td>
-                                        <td class="text-center">{{$orderItem -> options}}</td>
-                                        <td class="text-center">{{$orderItem -> rstatus == 0 ? 'Ne' : 'Da'}}</td>
+{{--                                        <td class="text-center">{{$orderItem -> options}}</td>--}}
+{{--                                        <td class="text-center">{{$orderItem -> rstatus == 0 ? 'Ne' : 'Da'}}</td>--}}
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -218,7 +218,7 @@
                         <div class="my-account__address-item col-md-6">
                             <div class="my-account__address-item__detail">
                                 <p>{{$order->name}}</p>
-                                <p>{{$order -> adress}}</p>
+                                <p>{{$order -> address}}</p>
                                 <p>{{$order -> city}} </p>
                                 <p>{{$order -> country}}</p>
                                 <p>{{$order -> zip}}</p>
