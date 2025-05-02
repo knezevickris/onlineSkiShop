@@ -1,66 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Ovo je Laravel aplikacija za elektronsku prodavnicu ski opreme, urađena za potrebe završnog samostalnog rada na studijama. Aplikacija omogućava pregledanje proizvoda, filtraciju i sortiranje po različitim kriterijumima, registraciju kupaca kojim potom mogu da dodaju artikle u korpu, koriste kupone, odaberu veličinu proizvoda i izvrše narudžbu, te da vide istoriju svojih narudžbi. Administrator može upravljati artiklima, kategorijama, brendovima, kuponima, promocijama i narudžbama.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Korištene tehnologije:
+- PHP 8.4.2
+- Laravel 11
+- MySQL
+- Blade templating
+- JavaScript / jQuery
+- Bootstrap
 
-## About Laravel
+Funkcionalnosti:
+- Registracija i prijava korisnika
+- Pregled proizvoda sa filterima (pol, brend, kategorija, cijena)
+- Pretraga artikala na osnovu naziva
+- Detaljan prikaz proizvoda sa mogućnošću izbora veličine
+- Dodavanje u korpu, uređivanje količine i uklanjanje artikala
+- Primjena kupona za popust
+- Checkout proces i prikaz računa
+- Istorija narudžbi po korisniku
+- Istorija adresa dostave
+- Promjena lozinke korisničkog naloga
+- Lista želja/omiljenih artikala
+- Panel za povratne informacije
+- Admin panel za upravljanje:
+  - proizvodima
+  - kategorijama
+  - brendovima
+  - kuponima
+  - promocijama
+  - narudžbama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Instalacija:
+1. Kloniraj repozitorijum
+2. Instaliraj Composer zavisnosti: composer install
+3. Kopiraj .env fajl i generiši aplikacioni ključ:     cp .env.example .env
+                                                       php artisan key:generate
+4. Podesi podatke za bazu u .env fajlu:
+DB_CONNECTION=mysql  
+DB_HOST=127.0.0.1  
+DB_PORT=3306  
+DB_DATABASE=ecommerce  
+DB_USERNAME=root  
+DB_PASSWORD=
+5. Otvori phpMyAdmin i napravi novu bazu sa istim imenom kao što je navedeno u .env fajlu (DB_DATABASE)
+6. Importuj skriptu baze podataka iz fajla ecommerce.sql
+7. Pokreni Apache i MySql u XAMPP i u pokreni lokalni server: php artisan serve
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Test korisnici:
+Administrator email: kristina@gmail.com password: 12345678
+Kupac email: miki@gmail.com password: marko12345
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Screenshots:
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![Snimak ekrana 2025-05-02 195207](https://github.com/user-attachments/assets/f1de151f-fbd0-4bf5-b35e-7aa8fd0a7094)
+![Snimak ekrana 2025-05-02 195259](https://github.com/user-attachments/assets/51244293-0905-4f45-8844-9a338b6334f9)
+![Snimak ekrana 2025-05-02 195327](https://github.com/user-attachments/assets/b9a9f6aa-cf6e-4d92-b0df-eb54895da234)
+![Snimak ekrana 2025-05-02 193525](https://github.com/user-attachments/assets/198c2804-8471-4384-bd11-0801f1e6f66b)
+![Snimak ekrana 2025-05-02 195440](https://github.com/user-attachments/assets/4b3fc1dc-0f7c-4ac0-bd68-b56c46d77d21)
+![Snimak ekrana 2025-05-02 194910](https://github.com/user-attachments/assets/43200209-05a5-4760-a6e0-ac52902ce70d)
+![Snimak ekrana 2025-05-02 194953](https://github.com/user-attachments/assets/b1fbc27c-bbfb-456d-91b0-186ba467d7bf)
+![Snimak ekrana 2025-05-02 195043](https://github.com/user-attachments/assets/fb6ad06a-ced5-4b90-84e2-a2f71e25abf0)
+![Snimak ekrana 2025-05-02 194146](https://github.com/user-attachments/assets/4652bee9-8ffc-4931-93f2-8db780661c5e)
+![Snimak ekrana 2025-05-02 194236](https://github.com/user-attachments/assets/c7118761-ab2a-426c-b873-43a92b781664)
+![Snimak ekrana 2025-05-02 194656](https://github.com/user-attachments/assets/4b26514a-3c2a-4728-b7fc-e5b85d350c54)
+![Snimak ekrana 2025-05-02 194429](https://github.com/user-attachments/assets/c17c3368-7bb7-4af3-869e-e72b40e0ec48)
+![Snimak ekrana 2025-05-02 195909](https://github.com/user-attachments/assets/bd905d89-cbdc-4806-9af7-6f5408e605ec)
