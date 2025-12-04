@@ -29,25 +29,6 @@ Funkcionalnosti:
   - promocijama
   - narudžbama
 
-Instalacija:
-1. Kloniraj repozitorijum
-2. Instaliraj Composer zavisnosti: composer install
-3. Kopiraj .env fajl i generiši aplikacioni ključ:     cp .env.example .env
-                                                       php artisan key:generate
-4. Podesi podatke za bazu u .env fajlu:
-DB_CONNECTION=mysql  
-DB_HOST=127.0.0.1  
-DB_PORT=3306  
-DB_DATABASE=ecommerce  
-DB_USERNAME=root  
-DB_PASSWORD=
-5. Otvori phpMyAdmin i napravi novu bazu sa istim imenom kao što je navedeno u .env fajlu (DB_DATABASE)
-6. Importuj skriptu baze podataka iz fajla ecommerce.sql
-7. Pokreni Apache i MySql u XAMPP i u pokreni lokalni server: php artisan serve
-
-Test korisnici:
-Administrator email: kristina@gmail.com password: 12345678
-Kupac email: miki@gmail.com password: marko12345
 
 Screenshots:
 
