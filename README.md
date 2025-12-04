@@ -7,6 +7,8 @@ Korištene tehnologije:
 - Blade templating
 - JavaScript / jQuery
 - Bootstrap
+- HTML
+- CSS
 
 Funkcionalnosti:
 - Registracija i prijava korisnika
@@ -45,3 +47,4 @@ Screenshots:
 ![Snimak ekrana 2025-05-02 194656](https://github.com/user-attachments/assets/4b26514a-3c2a-4728-b7fc-e5b85d350c54)
 ![Snimak ekrana 2025-05-02 194429](https://github.com/user-attachments/assets/c17c3368-7bb7-4af3-869e-e72b40e0ec48)
 ![Snimak ekrana 2025-05-02 195909](https://github.com/user-attachments/assets/bd905d89-cbdc-4806-9af7-6f5408e605ec)
+<img width="1415" height="852" alt="konceptualniModel" src="https://github.com/user-attachments/assets/3af47558-ef34-4f2d-851f-59cc464c30f3" />
